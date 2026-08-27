@@ -1,19 +1,22 @@
-import { Canvas } from '@react-three/fiber'
-import { Suspense } from 'react'
-import SceneSetup from './components/Scene/SceneSetup'
-import Axes from './components/Scene/Axes'
+import { useState } from 'react'
+import VectorsPage from './pages/VectorsPage'
 import './App.css'
 
-function LoadingFallback() {
+const PAGES = ['Vectors', 'Matrices', 'Scalars']
+
+function ComingSoon({ name }) {
   return (
-    <mesh>
-      <boxGeometry args={[0.5, 0.5, 0.5]} />
-      <meshStandardMaterial color="#4da6ff" wireframe />
-    </mesh>
+    <div className="coming-soon">
+      <span className="cs-icon">🚧</span>
+      <h2>{name}</h2>
+      <p>Coming soon</p>
+    </div>
   )
 }
 
 export default function App() {
+  const [activePage, setActivePage] = useState('Vectors')
+
   return (
     <div className="app-container">
       {/* Header */}
@@ -25,29 +28,25 @@ export default function App() {
           </h1>
           <p className="app-subtitle">Interactive 3D Linear Algebra Explorer</p>
         </div>
+
         <nav className="module-nav">
-          <button className="nav-btn active">Vectors</button>
-          <button className="nav-btn">Scalars</button>
-          <button className="nav-btn">Matrices</button>
+          {PAGES.map((name) => (
+            <button
+              key={name}
+              className={`nav-btn ${activePage === name ? 'active' : ''}`}
+              onClick={() => setActivePage(name)}
+            >
+              {name}
+            </button>
+          ))}
         </nav>
       </header>
 
-      {/* 3D Canvas */}
-      <main className="canvas-container">
-        <Canvas
-          camera={{ position: [6, 5, 8], fov: 55, near: 0.1, far: 100 }}
-          gl={{ antialias: true, alpha: false }}
-          shadows
-        >
-          <color attach="background" args={['#0a0f1e']} />
-          <Suspense fallback={<LoadingFallback />}>
-            <SceneSetup />
-            <Axes />
-          </Suspense>
-        </Canvas>
-
-        {/* Overlay badge */}
-        <div className="phase-badge">Phase 0 — Pipeline Verified ✓</div>
+      {/* Page content */}
+      <main className="page-host">
+        {activePage === 'Vectors'  && <VectorsPage />}
+        {activePage === 'Matrices' && <ComingSoon name="Matrices" />}
+        {activePage === 'Scalars'  && <ComingSoon name="Scalars" />}
       </main>
     </div>
   )

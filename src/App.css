@@ -54,6 +54,21 @@ body {
   width: 100%;
 }
 
+/* Page host fills remaining vertical space */
+.page-host {
+  flex: 1;
+  overflow: hidden;
+  display: flex;
+}
+
+/* Each page is a flex row: canvas + optional side panel */
+.page-layout {
+  flex: 1;
+  display: flex;
+  flex-direction: row;
+  overflow: hidden;
+}
+
 /* ─── Header ────────────────────────────────────────────────────────── */
 .app-header {
   height: var(--header-h);
@@ -175,23 +190,27 @@ body {
   height: 100% !important;
 }
 
-/* ─── Phase Badge ───────────────────────────────────────────────────── */
-.phase-badge {
-  position: absolute;
-  bottom: 20px;
-  right: 20px;
-  padding: 8px 16px;
-  background: rgba(10, 15, 30, 0.8);
-  backdrop-filter: blur(8px);
-  border: 1px solid rgba(77,255,136,0.4);
-  border-radius: 20px;
-  font-size: 0.75rem;
-  font-family: 'JetBrains Mono', monospace;
-  color: var(--accent-green);
-  letter-spacing: 0.5px;
-  box-shadow: 0 0 16px rgba(77,255,136,0.15);
-  pointer-events: none;
-  animation: fadeInUp 0.5s ease 0.3s both;
+/* ─── Coming Soon ───────────────────────────────────────────────────── */
+.coming-soon {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  color: var(--text-muted);
+}
+
+.coming-soon .cs-icon { font-size: 2.5rem; }
+
+.coming-soon h2 {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+.coming-soon p {
+  font-size: 0.82rem;
 }
 
 @keyframes fadeInUp {

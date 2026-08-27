@@ -1,0 +1,298 @@
+/* ─── Vector Panel ───────────────────────────────────────────────────────── */
+
+.vector-panel {
+  width: 280px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  background: rgba(10, 15, 30, 0.88);
+  backdrop-filter: blur(16px);
+  border-left: 1px solid rgba(255, 255, 255, 0.07);
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+/* ─── Panel header ──────────────────────────────────────────────────────── */
+.panel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 16px 12px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  flex-shrink: 0;
+}
+
+.panel-title {
+  font-size: 0.9rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  color: #94a3b8;
+}
+
+.add-btn {
+  padding: 5px 14px;
+  border-radius: 20px;
+  border: 1px solid rgba(77, 166, 255, 0.45);
+  background: rgba(77, 166, 255, 0.12);
+  color: #4da6ff;
+  font-size: 0.78rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.18s ease;
+  font-family: 'Inter', sans-serif;
+}
+
+.add-btn:hover {
+  background: rgba(77, 166, 255, 0.22);
+  box-shadow: 0 0 12px rgba(77, 166, 255, 0.25);
+  transform: translateY(-1px);
+}
+
+/* ─── Vector list ───────────────────────────────────────────────────────── */
+.vec-list {
+  flex: 1;
+  padding: 10px 10px 4px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  overflow-y: auto;
+}
+
+.empty-hint {
+  font-size: 0.78rem;
+  color: #475569;
+  text-align: center;
+  padding: 24px 0;
+}
+
+/* ─── Vector card ───────────────────────────────────────────────────────── */
+.vec-card {
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 12px;
+  background: rgba(26, 34, 53, 0.7);
+  cursor: pointer;
+  transition: border-color 0.18s, background 0.18s, box-shadow 0.18s;
+  overflow: hidden;
+}
+
+.vec-card:hover {
+  border-color: rgba(255, 255, 255, 0.14);
+  background: rgba(30, 42, 66, 0.8);
+}
+
+.vec-card.selected {
+  border-color: rgba(77, 166, 255, 0.5);
+  background: rgba(77, 166, 255, 0.07);
+  box-shadow: 0 0 18px rgba(77, 166, 255, 0.1);
+}
+
+.vec-card.hidden {
+  opacity: 0.45;
+}
+
+/* Card header row */
+.vec-card-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 10px 10px 12px;
+}
+
+.vec-swatch {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  box-shadow: 0 0 6px currentColor;
+}
+
+.vec-label-input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  font-size: 0.88rem;
+  font-weight: 600;
+  font-family: 'JetBrains Mono', monospace;
+  min-width: 0;
+}
+
+.vec-mag {
+  font-size: 0.7rem;
+  color: #475569;
+  white-space: nowrap;
+  font-family: 'JetBrains Mono', monospace;
+}
+
+.vec-card-actions {
+  display: flex;
+  gap: 4px;
+}
+
+.icon-btn {
+  width: 24px;
+  height: 24px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  font-size: 0.75rem;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.15s;
+  color: #94a3b8;
+}
+
+.icon-btn:hover { background: rgba(255, 255, 255, 0.08); }
+.icon-btn.dim { opacity: 0.5; }
+.icon-btn.danger:hover { background: rgba(255, 77, 77, 0.2); color: #ff4d4d; }
+
+/* ─── Component controls ────────────────────────────────────────────────── */
+.vec-controls {
+  padding: 4px 12px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  animation: slideDown 0.18s ease;
+}
+
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.comp-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: default;
+}
+
+.comp-label {
+  font-size: 0.72rem;
+  font-weight: 600;
+  font-family: 'JetBrains Mono', monospace;
+  color: #64748b;
+  width: 36px;
+  text-transform: uppercase;
+  flex-shrink: 0;
+}
+
+.comp-slider {
+  flex: 1;
+  -webkit-appearance: none;
+  height: 4px;
+  border-radius: 2px;
+  background: rgba(255, 255, 255, 0.1);
+  outline: none;
+  cursor: pointer;
+}
+
+.comp-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: #4da6ff;
+  cursor: pointer;
+  box-shadow: 0 0 6px rgba(77, 166, 255, 0.6);
+  transition: transform 0.1s;
+}
+
+.comp-slider::-webkit-slider-thumb:hover {
+  transform: scale(1.2);
+}
+
+.comp-number {
+  width: 48px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 6px;
+  color: #f1f5f9;
+  font-size: 0.72rem;
+  font-family: 'JetBrains Mono', monospace;
+  text-align: center;
+  padding: 3px 4px;
+  outline: none;
+  -moz-appearance: textfield;
+}
+
+.comp-number::-webkit-inner-spin-button,
+.comp-number::-webkit-outer-spin-button { -webkit-appearance: none; }
+
+.comp-number:focus {
+  border-color: rgba(77, 166, 255, 0.5);
+  background: rgba(77, 166, 255, 0.08);
+}
+
+.color-picker {
+  width: 32px;
+  height: 22px;
+  border: none;
+  background: none;
+  cursor: pointer;
+  padding: 0;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.vec-coords {
+  font-size: 0.7rem;
+  font-family: 'JetBrains Mono', monospace;
+  color: #475569;
+  text-align: center;
+  padding-top: 2px;
+}
+
+/* ─── Ops panel ─────────────────────────────────────────────────────────── */
+.ops-panel {
+  margin: 8px 10px 4px;
+  padding: 12px 14px;
+  background: rgba(26, 34, 53, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 12px;
+  flex-shrink: 0;
+}
+
+.ops-title {
+  font-size: 0.72rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  color: #64748b;
+  margin-bottom: 10px;
+}
+
+.ops-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px 8px;
+}
+
+.ops-label {
+  font-size: 0.72rem;
+  font-family: 'JetBrains Mono', monospace;
+  color: #64748b;
+  display: flex;
+  align-items: center;
+}
+
+.ops-value {
+  font-size: 0.72rem;
+  font-family: 'JetBrains Mono', monospace;
+  color: #4da6ff;
+  word-break: break-all;
+}
+
+/* ─── Footer hint ───────────────────────────────────────────────────────── */
+.panel-hint {
+  padding: 10px 14px 14px;
+  font-size: 0.66rem;
+  color: #334466;
+  text-align: center;
+  flex-shrink: 0;
+}
