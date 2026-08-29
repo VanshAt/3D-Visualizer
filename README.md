@@ -20,13 +20,21 @@ Visualise vectors, operations, and transformations right in your browser — no 
 
 ![Two vectors with Vector Operations panel showing dot · cross × angle](public/screenshots/03-vector-operations.png)
 
-### Matrices module (coming soon)
+### Click-to-select in 3D — raycasting on vector arrows
 
-![Matrices placeholder page](public/screenshots/04-coming-soon.png)
+![Clicking a vector arrow in 3D selects it and expands the side-panel card](public/screenshots/06-vectors-click-select.png)
+
+### Matrices module — identity state
+
+![Matrices page with identity matrix and three orthogonal basis arrows](public/screenshots/04-matrices-identity.png)
+
+### Matrices — Rotate Y 45° applied (animated transform)
+
+![Basis arrows rotated after applying Rotate Y 45° — det=1.000, basis images updated](public/screenshots/05-matrices-rotate-applied.png)
 
 ---
 
-## Features (Day 2 ✅)
+## Features (Day 3 ✅)
 
 | Feature | Status |
 |---|---|
@@ -40,9 +48,11 @@ Visualise vectors, operations, and transformations right in your browser — no 
 | Selection pulse animation | ✅ |
 | Vector operations panel — dot · cross × angle | ✅ |
 | Page routing — Vectors / Matrices / Scalars nav | ✅ |
-| Matrices module | 🚧 Day 3 |
-| Matrix transforms — animate basis vectors | 🚧 Day 3 |
-| Click-to-select in 3D (raycasting) | 🚧 Day 3 |
+| **Matrices module** — 3×3 editable matrix panel + presets | ✅ |
+| **Matrix transform animation** — basis vectors lerp with smoothstep | ✅ |
+| **Click-to-select in 3D** — raycasting via R3F onClick | ✅ |
+| Span visualisation, eigenvalue explorer | 🚧 Day 4 |
+
 
 ---
 

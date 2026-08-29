@@ -1,5 +1,6 @@
 import { useState } from 'react'
-import VectorsPage from './pages/VectorsPage'
+import VectorsPage  from './pages/VectorsPage'
+import MatricesPage from './pages/MatricesPage'
 import './App.css'
 
 const PAGES = ['Vectors', 'Matrices', 'Scalars']
@@ -45,7 +46,7 @@ export default function App() {
       {/* Page content */}
       <main className="page-host">
         {activePage === 'Vectors'  && <VectorsPage />}
-        {activePage === 'Matrices' && <ComingSoon name="Matrices" />}
+        {activePage === 'Matrices' && <MatricesPage />}
         {activePage === 'Scalars'  && <ComingSoon name="Scalars" />}
       </main>
     </div>

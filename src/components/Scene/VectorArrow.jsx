@@ -1,5 +1,5 @@
 import { useMemo, useRef } from 'react'
-import { useFrame } from '@react-three/fiber'
+import { useFrame, useThree } from '@react-three/fiber'
 import { Text } from '@react-three/drei'
 import * as THREE from 'three'
 import { magnitude, normalize } from '../../lib/math'
@@ -14,9 +14,10 @@ const MIN_MAG       = 0.01   // below this we don't draw the arrow
  * Renders a single 3D arrow from the origin to (x, y, z).
  * Props: x, y, z, color, label, selected
  */
-export default function VectorArrow({ x, y, z, color = '#4da6ff', label = '', selected = false }) {
+export default function VectorArrow({ x, y, z, color = '#4da6ff', label = '', selected = false, onSelect }) {
   const shaftRef  = useRef()
   const groupRef  = useRef()
+  const { gl }    = useThree()       // canvas DOM element for cursor changes
 
   const end = [x, y, z]
   const mag = magnitude(end)
@@ -70,7 +71,12 @@ export default function VectorArrow({ x, y, z, color = '#4da6ff', label = '', se
   const emissiveInt   = selected ? 0.45  : 0
 
   return (
-    <group ref={groupRef}>
+    <group
+      ref={groupRef}
+      onClick={(e) => { e.stopPropagation(); onSelect?.() }}
+      onPointerOver={(e) => { e.stopPropagation(); gl.domElement.style.cursor = 'pointer' }}
+      onPointerOut={(e)  => { e.stopPropagation(); gl.domElement.style.cursor = 'default' }}
+    >
       {/* ── Shaft ────────────────────────────────────────────────────────── */}
       {shaftLength > 0 && (
         <mesh position={shaftMid} quaternion={quaternion} ref={shaftRef}>

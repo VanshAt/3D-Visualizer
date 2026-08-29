@@ -1,0 +1,329 @@
+/* ─── Matrix Panel ───────────────────────────────────────────────────────── */
+
+.matrix-panel {
+  width: 300px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  background: rgba(10, 15, 30, 0.88);
+  backdrop-filter: blur(16px);
+  border-left: 1px solid rgba(255, 255, 255, 0.07);
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+/* ─── Header ─────────────────────────────────────────────────────────────── */
+/* .panel-header and .panel-title are shared via App.css — reusing same class */
+
+/* ─── Preset row ─────────────────────────────────────────────────────────── */
+.preset-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 16px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.preset-label {
+  font-size: 0.72rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: #64748b;
+  white-space: nowrap;
+}
+
+.preset-select {
+  flex: 1;
+  background: rgba(26, 34, 53, 0.9);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 8px;
+  color: #f1f5f9;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.8rem;
+  padding: 6px 10px;
+  cursor: pointer;
+  outline: none;
+  transition: border-color 0.18s;
+  appearance: none;
+  -webkit-appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%2364748b' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  padding-right: 28px;
+}
+
+.preset-select:focus {
+  border-color: rgba(77, 166, 255, 0.5);
+  box-shadow: 0 0 0 2px rgba(77, 166, 255, 0.12);
+}
+
+.preset-select option {
+  background: #111827;
+  color: #f1f5f9;
+}
+
+/* ─── Matrix bracket display ─────────────────────────────────────────────── */
+.matrix-bracket-wrap {
+  display: flex;
+  justify-content: center;
+  padding: 18px 16px 12px;
+}
+
+.bracket-container {
+  display: flex;
+  align-items: stretch;
+  gap: 4px;
+}
+
+/* The [ and ] bracket bars */
+.bracket {
+  width: 7px;
+  border-top: 2px solid rgba(77, 166, 255, 0.55);
+  border-bottom: 2px solid rgba(77, 166, 255, 0.55);
+  flex-shrink: 0;
+}
+
+.bracket-left {
+  border-left: 2px solid rgba(77, 166, 255, 0.55);
+  border-radius: 3px 0 0 3px;
+}
+
+.bracket-right {
+  border-right: 2px solid rgba(77, 166, 255, 0.55);
+  border-radius: 0 3px 3px 0;
+}
+
+/* 4 cols: row-label + 3 cells */
+.matrix-grid {
+  display: grid;
+  grid-template-columns: 18px repeat(3, 1fr);
+  gap: 5px;
+  padding: 6px 6px;
+}
+
+/* Header labels (î / ĵ / k̂ column headers) */
+.mat-hdr {
+  font-size: 0.72rem;
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 600;
+  text-align: center;
+  line-height: 1;
+  padding-bottom: 2px;
+  color: #475569;
+}
+
+/* Row axis labels (x / y / z) */
+.mat-row-lbl {
+  font-size: 0.68rem;
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 600;
+  color: #475569;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Individual numeric cell */
+.matrix-cell {
+  width: 100%;
+  height: 38px;
+  text-align: center;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  border-radius: 7px;
+  color: #f1f5f9;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.8rem;
+  font-weight: 500;
+  outline: none;
+  transition: border-color 0.15s, background 0.15s, box-shadow 0.15s;
+  -moz-appearance: textfield;
+}
+
+.matrix-cell::-webkit-inner-spin-button,
+.matrix-cell::-webkit-outer-spin-button { -webkit-appearance: none; }
+
+.matrix-cell:hover {
+  border-color: rgba(77, 166, 255, 0.25);
+  background: rgba(77, 166, 255, 0.04);
+}
+
+.matrix-cell:focus {
+  border-color: rgba(77, 166, 255, 0.6);
+  background: rgba(77, 166, 255, 0.08);
+  box-shadow: 0 0 0 2px rgba(77, 166, 255, 0.15),
+              inset 0 0 8px rgba(77, 166, 255, 0.06);
+  color: #7dd3fc;
+}
+
+/* Diagonal (identity) cells get a subtle tint */
+.matrix-cell.diag {
+  border-color: rgba(77, 166, 255, 0.22);
+  background: rgba(77, 166, 255, 0.06);
+}
+
+/* ─── Determinant row ────────────────────────────────────────────────────── */
+.matrix-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 16px;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.info-label {
+  font-size: 0.72rem;
+  font-family: 'JetBrains Mono', monospace;
+  color: #64748b;
+  font-weight: 600;
+}
+
+.info-value {
+  font-size: 0.88rem;
+  font-family: 'JetBrains Mono', monospace;
+  color: #4dff88;
+  font-weight: 600;
+}
+
+.info-value.det-zero {
+  color: #fb923c;
+}
+
+.det-warn {
+  font-size: 0.65rem;
+  color: #fb923c;
+  margin-left: auto;
+  background: rgba(251, 146, 60, 0.1);
+  border: 1px solid rgba(251, 146, 60, 0.3);
+  border-radius: 6px;
+  padding: 2px 7px;
+}
+
+/* ─── Basis image annotations ────────────────────────────────────────────── */
+.basis-annotation {
+  padding: 12px 16px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.annotation-title {
+  font-size: 0.68rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: #475569;
+  margin-bottom: 8px;
+}
+
+.annotation-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 4px;
+}
+
+.ann-label {
+  font-size: 0.78rem;
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 700;
+  width: 32px;
+  flex-shrink: 0;
+}
+
+.ann-vec {
+  font-size: 0.72rem;
+  font-family: 'JetBrains Mono', monospace;
+  color: #94a3b8;
+}
+
+/* ─── Animation progress bar ─────────────────────────────────────────────── */
+.anim-bar-wrap {
+  position: relative;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.06);
+  margin: 0;
+  overflow: visible;
+}
+
+.anim-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #4da6ff, #a855f7);
+  border-radius: 0 2px 2px 0;
+  min-width: 0;
+}
+
+.anim-bar-fill.animating {
+  box-shadow: 0 0 8px rgba(77, 166, 255, 0.6);
+}
+
+.anim-pct {
+  position: absolute;
+  right: 8px;
+  top: 6px;
+  font-size: 0.62rem;
+  font-family: 'JetBrains Mono', monospace;
+  color: #4da6ff;
+  opacity: 0.7;
+}
+
+/* ─── Action buttons ─────────────────────────────────────────────────────── */
+.matrix-actions {
+  display: flex;
+  gap: 8px;
+  padding: 14px 16px 10px;
+}
+
+.apply-btn {
+  flex: 1;
+  padding: 9px 0;
+  border-radius: 10px;
+  border: 1px solid rgba(77, 166, 255, 0.5);
+  background: linear-gradient(135deg, rgba(77, 166, 255, 0.18), rgba(168, 85, 247, 0.18));
+  color: #7dd3fc;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.18s ease;
+  letter-spacing: 0.2px;
+}
+
+.apply-btn:hover:not(:disabled) {
+  background: linear-gradient(135deg, rgba(77, 166, 255, 0.30), rgba(168, 85, 247, 0.30));
+  box-shadow: 0 0 16px rgba(77, 166, 255, 0.3);
+  transform: translateY(-1px);
+}
+
+.apply-btn:disabled {
+  opacity: 0.45;
+  cursor: default;
+}
+
+.reset-btn {
+  padding: 9px 16px;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.05);
+  color: #64748b;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.82rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.18s ease;
+}
+
+.reset-btn:hover:not(:disabled) {
+  background: rgba(255, 255, 255, 0.09);
+  color: #94a3b8;
+  border-color: rgba(255, 255, 255, 0.18);
+}
+
+.reset-btn:disabled {
+  opacity: 0.35;
+  cursor: default;
+}
+
+/* ─── Footer hint ────────────────────────────────────────────────────────── */
+/* .panel-hint is shared with VectorPanel — same class */

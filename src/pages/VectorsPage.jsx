@@ -7,7 +7,7 @@ import VectorPanel from '../components/UI/VectorPanel'
 import { useStore } from '../state/useStore'
 
 function VectorScene() {
-  const { vectors, selectedId } = useStore()
+  const { vectors, selectedId, setSelectedId } = useStore()
   return (
     <>
       <SceneSetup />
@@ -23,6 +23,7 @@ function VectorScene() {
             color={v.color}
             label={v.label}
             selected={v.id === selectedId}
+            onSelect={() => setSelectedId(v.id === selectedId ? null : v.id)}
           />
         ))}
     </>
