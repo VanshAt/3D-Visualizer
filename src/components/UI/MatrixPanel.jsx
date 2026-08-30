@@ -1,6 +1,6 @@
-import { useState } from 'react'
+import { useState, useMemo } from 'react'
 import { useMatrixStore, PRESETS } from '../../state/useMatrixStore'
-import { det3, smoothStep } from '../../lib/math'
+import { det3, smoothStep, fmt, eigenSolve3, eigenColor, complexEigenColor } from '../../lib/math'
 import './MatrixPanel.css'
 
 // ─── Individual matrix cell input ─────────────────────────────────────────────
@@ -47,15 +47,69 @@ function BasisAnnotation({ matrix }) {
   )
 }
 
+// ─── Eigenvalues section ────────────────────────────────────────────────────────
+function EigenSection({ matrix, showEigenvectors, setShowEigenvectors }) {
+  const { real, complex } = useMemo(() => eigenSolve3(matrix), [matrix])
+  const hasAny = real.length > 0 || complex.length > 0
+
+  return (
+    <div className="eigen-section">
+      <div className="eigen-section-header">
+        <p className="annotation-title">Eigenvalues</p>
+        <button
+          id="eigen-toggle-btn"
+          className={`eigen-vis-btn ${showEigenvectors ? 'active' : ''}`}
+          onClick={() => setShowEigenvectors(!showEigenvectors)}
+          title={showEigenvectors ? 'Hide eigenvector arrows' : 'Show eigenvector arrows'}
+        >
+          {showEigenvectors ? '👁 Hide' : '👁 Show'}
+        </button>
+      </div>
+
+      {!hasAny && (
+        <p className="eigen-empty">Matrix contains non-finite values</p>
+      )}
+
+      {real.map(({ lambda, vec }, i) => (
+        <div key={`real-${i}`} className="eigen-row">
+          <span className="eigen-dot" style={{ background: eigenColor(lambda) }} />
+          <div className="eigen-info">
+            <span className="eigen-lambda">λ = {lambda.toFixed(3)}</span>
+            <span className="eigen-vec">
+              ({fmt(vec[0])}, {fmt(vec[1])}, {fmt(vec[2])})
+            </span>
+          </div>
+        </div>
+      ))}
+
+      {complex.map(({ re, im, magnitude: mod, angleDeg }, i) => (
+        <div key={`cx-${i}`} className="eigen-row eigen-complex-row">
+          <span className="eigen-dot" style={{ background: complexEigenColor(mod) }} />
+          <div className="eigen-info">
+            <span className="eigen-lambda">
+              λ = {re.toFixed(2)} ± {im.toFixed(2)}i
+            </span>
+            <span className="eigen-complex-badge">
+              |λ| = {mod.toFixed(3)} · ∠{angleDeg.toFixed(1)}°
+            </span>
+          </div>
+        </div>
+      ))}
+    </div>
+  )
+}
+
 // ─── Main panel ───────────────────────────────────────────────────────────────
 export default function MatrixPanel() {
-  const matrix          = useMatrixStore((s) => s.matrix)
-  const animating       = useMatrixStore((s) => s.animating)
-  const progress        = useMatrixStore((s) => s.progress)
-  const setCell         = useMatrixStore((s) => s.setCell)
-  const setPreset       = useMatrixStore((s) => s.setPreset)
-  const startAnimation  = useMatrixStore((s) => s.startAnimation)
-  const resetTransform  = useMatrixStore((s) => s.resetTransform)
+  const matrix             = useMatrixStore((s) => s.matrix)
+  const animating          = useMatrixStore((s) => s.animating)
+  const progress           = useMatrixStore((s) => s.progress)
+  const setCell            = useMatrixStore((s) => s.setCell)
+  const setPreset          = useMatrixStore((s) => s.setPreset)
+  const startAnimation     = useMatrixStore((s) => s.startAnimation)
+  const resetTransform     = useMatrixStore((s) => s.resetTransform)
+  const showEigenvectors   = useMatrixStore((s) => s.showEigenvectors)
+  const setShowEigenvectors = useMatrixStore((s) => s.setShowEigenvectors)
 
   const det      = det3(matrix)
   const detStr   = Math.abs(det) < 1e-9 ? '0' : det.toFixed(3)
@@ -140,6 +194,13 @@ export default function MatrixPanel() {
 
       {/* ── Basis image annotations ──────────────────────────────────── */}
       <BasisAnnotation matrix={matrix} />
+
+      {/* ── Eigenvalues section ──────────────────────────────────────── */}
+      <EigenSection
+        matrix={matrix}
+        showEigenvectors={showEigenvectors}
+        setShowEigenvectors={setShowEigenvectors}
+      />
 
       {/* ── Animation progress bar ───────────────────────────────────── */}
       <div className="anim-bar-wrap">

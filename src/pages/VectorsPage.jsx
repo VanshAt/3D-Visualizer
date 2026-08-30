@@ -3,6 +3,7 @@ import { Suspense } from 'react'
 import SceneSetup from '../components/Scene/SceneSetup'
 import Axes from '../components/Scene/Axes'
 import VectorArrow from '../components/Scene/VectorArrow'
+import SpanMesh from '../components/Scene/SpanMesh'
 import VectorPanel from '../components/UI/VectorPanel'
 import { useStore } from '../state/useStore'
 
@@ -12,6 +13,7 @@ function VectorScene() {
     <>
       <SceneSetup />
       <Axes />
+      <SpanMesh />
       {vectors
         .filter((v) => v.visible)
         .map((v) => (

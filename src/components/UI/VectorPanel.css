@@ -296,3 +296,71 @@
   text-align: center;
   flex-shrink: 0;
 }
+
+/* ─── Header actions row ────────────────────────────────────────────────── */
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* ─── Span toggle button ────────────────────────────────────────────────── */
+.span-btn {
+  padding: 5px 11px;
+  border-radius: 20px;
+  border: 1px solid rgba(192, 132, 252, 0.4);
+  background: rgba(192, 132, 252, 0.08);
+  color: #c084fc;
+  font-size: 0.75rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.18s ease;
+  font-family: 'Inter', sans-serif;
+  white-space: nowrap;
+}
+
+.span-btn:hover {
+  background: rgba(192, 132, 252, 0.18);
+  box-shadow: 0 0 10px rgba(192, 132, 252, 0.22);
+  transform: translateY(-1px);
+}
+
+.span-btn.active {
+  background: rgba(192, 132, 252, 0.22);
+  border-color: rgba(192, 132, 252, 0.7);
+  box-shadow: 0 0 14px rgba(192, 132, 252, 0.3);
+  color: #e9d5ff;
+}
+
+/* ─── Span info panel ───────────────────────────────────────────────────── */
+.span-info {
+  margin: 4px 10px 0;
+  padding: 10px 14px 12px;
+  background: rgba(192, 132, 252, 0.06);
+  border: 1px solid rgba(192, 132, 252, 0.18);
+  border-radius: 12px;
+  animation: slideDown 0.18s ease;
+  flex-shrink: 0;
+}
+
+.span-rank-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 6px;
+}
+
+.span-badge {
+  font-size: 1.05rem;
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 700;
+  color: #c084fc;
+  text-shadow: 0 0 10px rgba(192, 132, 252, 0.5);
+  min-width: 28px;
+}
+
+.span-desc {
+  font-size: 0.72rem;
+  color: #7e6f99;
+  font-style: italic;
+}

@@ -52,6 +52,9 @@ export const useStore = create((set, get) => ({
   selectedId: null,
   setSelectedId: (id) => set({ selectedId: id }),
 
+  showSpan:    false,
+  setShowSpan: (b) => set({ showSpan: b }),
+
   // ── derived helpers (not reactive — call inside component) ────────────────
   getVector: (id) => get().vectors.find((v) => v.id === id),
 }))

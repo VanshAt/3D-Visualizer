@@ -4,4 +4,10 @@ import { defineConfig } from 'vite'
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [react()],
+  server: {
+    watch: {
+      // Exclude static asset folders that don't affect the build
+      ignored: ['**/docs/**', '**/.git/**'],
+    },
+  },
 })

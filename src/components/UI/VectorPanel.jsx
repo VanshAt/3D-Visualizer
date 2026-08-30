@@ -1,5 +1,6 @@
+import { useMemo } from 'react'
 import { useStore } from '../../state/useStore'
-import { magnitude, dot, cross, fmt } from '../../lib/math'
+import { magnitude, dot, cross, fmt, gramSchmidtRank } from '../../lib/math'
 import './VectorPanel.css'
 
 // ─── Sub-components ───────────────────────────────────────────────────────────
@@ -141,22 +142,53 @@ function OpsPanel({ vectors }) {
   )
 }
 
+// ─── Span info panel ──────────────────────────────────────────────────────────
+const SPAN_DESC = ['—', 'a line through origin', 'a plane through origin', 'all of ℝ³']
+const SPAN_BADGE = ['', 'ℝ¹', 'ℝ²', 'ℝ³']
+
+function SpanInfo({ vectors }) {
+  const rank = useMemo(() => {
+    const vis = vectors.filter((v) => v.visible)
+    return gramSchmidtRank(vis.map((v) => [v.x, v.y, v.z]))
+  }, [vectors])
+
+  return (
+    <div className="span-info">
+      <h3 className="ops-title">Span</h3>
+      <div className="span-rank-row">
+        <span className="span-badge">{SPAN_BADGE[rank] || '—'}</span>
+        <span className="span-desc">{SPAN_DESC[rank] || '—'}</span>
+      </div>
+    </div>
+  )
+}
+
 // ─── Main panel ───────────────────────────────────────────────────────────────
 export default function VectorPanel() {
-  const { vectors, selectedId, setSelectedId, addVector } = useStore()
+  const { vectors, selectedId, setSelectedId, addVector, showSpan, setShowSpan } = useStore()
 
   return (
     <aside className="vector-panel">
       {/* Header */}
       <div className="panel-header">
         <span className="panel-title">Vectors</span>
-        <button
-          className="add-btn"
-          onClick={addVector}
-          title="Add vector"
-        >
-          + Add
-        </button>
+        <div className="header-actions">
+          <button
+            id="span-toggle-btn"
+            className={`span-btn ${showSpan ? 'active' : ''}`}
+            onClick={() => setShowSpan(!showSpan)}
+            title="Toggle span visualisation"
+          >
+            ∑ Span
+          </button>
+          <button
+            className="add-btn"
+            onClick={addVector}
+            title="Add vector"
+          >
+            + Add
+          </button>
+        </div>
       </div>
 
       {/* Vector list */}
@@ -176,6 +208,9 @@ export default function VectorPanel() {
 
       {/* Ops */}
       <OpsPanel vectors={vectors} />
+
+      {/* Span info */}
+      {showSpan && <SpanInfo vectors={vectors} />}
 
       {/* Footer hint */}
       <p className="panel-hint">Click a card to edit · Drag scene to orbit</p>

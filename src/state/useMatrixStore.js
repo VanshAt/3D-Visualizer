@@ -48,4 +48,8 @@ export const useMatrixStore = create((set) => ({
 
   /** Reset the visual progress back to 0 without changing the matrix */
   resetTransform: () => set({ animating: false, progress: 0 }),
+
+  // ── eigenvector display ────────────────────────────────────────────────────
+  showEigenvectors:    true,
+  setShowEigenvectors: (b) => set({ showEigenvectors: b }),
 }))
