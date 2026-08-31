@@ -32,15 +32,15 @@ Visualise vectors, operations, and transformations right in your browser — no 
 
 ![Basis arrows rotated after applying Rotate Y 45° — det=1.000, basis images updated](public/screenshots/05-matrices-rotate-applied.png)
 
-### Day 5 — ⌨ Shortcuts button in the header
+### Day 5 — Shortcuts button in the header
 
 ![App at initial load showing the new Shortcuts button in the top-right of the header](public/screenshots/07-day5-initial-state.png)
 
-### Day 5 — Keyboard shortcut overlay (press `?`)
+### Day 5 — Keyboard shortcut overlay (press ?)
 
 ![Shortcut cheat-sheet modal with groups: Navigation, Vectors, Matrices, Global](public/screenshots/08-day5-shortcut-overlay.png)
 
-### Day 5 — 📷 Export button in the Vectors panel
+### Day 5 — Export button in the Vectors panel
 
 ![Vectors panel header showing Span, + Add, and camera export buttons](public/screenshots/09-day5-export-button.png)
 
@@ -48,7 +48,7 @@ Visualise vectors, operations, and transformations right in your browser — no 
 
 ![Two vectors in the 3D scene with v2 selected and sliders expanded](public/screenshots/10-day5-two-vectors.png)
 
-### Day 5 — 📷 Export button in the Matrices panel
+### Day 5 — Export button in the Matrices panel
 
 ![Matrices page with export button alongside Apply and Reset action buttons](public/screenshots/11-day5-matrices-export.png)
 
