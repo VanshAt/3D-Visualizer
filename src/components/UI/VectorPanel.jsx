@@ -1,6 +1,7 @@
 import { useMemo } from 'react'
 import { useStore } from '../../state/useStore'
 import { magnitude, dot, cross, fmt, gramSchmidtRank } from '../../lib/math'
+import { useExportPng } from '../../hooks/useExportPng'
 import './VectorPanel.css'
 
 // ─── Sub-components ───────────────────────────────────────────────────────────
@@ -166,6 +167,7 @@ function SpanInfo({ vectors }) {
 // ─── Main panel ───────────────────────────────────────────────────────────────
 export default function VectorPanel() {
   const { vectors, selectedId, setSelectedId, addVector, showSpan, setShowSpan } = useStore()
+  const exportPng = useExportPng()
 
   return (
     <aside className="vector-panel">
@@ -177,16 +179,24 @@ export default function VectorPanel() {
             id="span-toggle-btn"
             className={`span-btn ${showSpan ? 'active' : ''}`}
             onClick={() => setShowSpan(!showSpan)}
-            title="Toggle span visualisation"
+            title="Toggle span visualisation [Space]"
           >
             ∑ Span
           </button>
           <button
             className="add-btn"
             onClick={addVector}
-            title="Add vector"
+            title="Add vector [A]"
           >
             + Add
+          </button>
+          <button
+            id="export-vectors-btn"
+            className="export-btn"
+            onClick={() => exportPng('linalg-viz-vectors.png')}
+            title="Export scene to PNG [E]"
+          >
+            📷
           </button>
         </div>
       </div>
@@ -213,7 +223,7 @@ export default function VectorPanel() {
       {showSpan && <SpanInfo vectors={vectors} />}
 
       {/* Footer hint */}
-      <p className="panel-hint">Click a card to edit · Drag scene to orbit</p>
+      <p className="panel-hint">Click a card · Drag to orbit · <kbd className="kbd-inline">?</kbd> shortcuts</p>
     </aside>
   )
 }

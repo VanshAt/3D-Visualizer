@@ -34,7 +34,7 @@ Visualise vectors, operations, and transformations right in your browser — no 
 
 ---
 
-## Features (Day 3 ✅)
+## Features (Day 5 ✅)
 
 | Feature | Status |
 |---|---|
@@ -51,10 +51,29 @@ Visualise vectors, operations, and transformations right in your browser — no 
 | **Matrices module** — 3×3 editable matrix panel + presets | ✅ |
 | **Matrix transform animation** — basis vectors lerp with smoothstep | ✅ |
 | **Click-to-select in 3D** — raycasting via R3F onClick | ✅ |
-| Span visualisation, eigenvalue explorer | 🚧 Day 4 |
+| **Span visualisation** — plane/line mesh, live rank badge | ✅ |
+| **Eigenvalue explorer** — real + complex eigen display, 3D arrows | ✅ |
+| **Keyboard shortcuts** — A / Del / Tab / Space / R / 1–2–3 / E / ? | ✅ |
+| **Export-to-PNG** — canvas screenshot download | ✅ |
+| **Shortcut overlay** — ? key opens cheat-sheet modal | ✅ |
 
 
 ---
+
+## Keyboard Shortcuts
+
+| Key | Action |
+|---|---|
+| `1` / `2` / `3` | Switch page (Vectors / Matrices / Scalars) |
+| `A` | Add vector (Vectors page) |
+| `Delete` | Delete selected vector |
+| `H` | Hide / show selected vector |
+| `Tab` / `Shift+Tab` | Cycle selection forward / backward |
+| `Space` | Toggle span (Vectors) · Apply transform (Matrices) |
+| `R` | Reset matrix transform |
+| `E` | Export scene to PNG |
+| `?` | Open / close shortcut overlay |
+| `Escape` | Deselect / close overlay |
 
 ## Tech Stack
 
@@ -105,7 +124,7 @@ src/
 
 - **Day 3** — Matrix transforms, 3D click-to-select, animated lerp between states
 - **Day 4** — Span visualisation, eigenvalue/eigenvector explorer
-- **Day 5** — Polish, keyboard shortcuts, export-to-image
+- **Day 5** — Keyboard shortcuts, export-to-PNG, shortcut overlay ✅
 
 ---
 

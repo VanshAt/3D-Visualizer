@@ -1,6 +1,7 @@
-import { useState, useMemo } from 'react'
+import React, { useState, useMemo } from 'react'
 import { useMatrixStore, PRESETS } from '../../state/useMatrixStore'
 import { det3, smoothStep, fmt, eigenSolve3, eigenColor, complexEigenColor } from '../../lib/math'
+import { useExportPng } from '../../hooks/useExportPng'
 import './MatrixPanel.css'
 
 // ─── Individual matrix cell input ─────────────────────────────────────────────
@@ -115,6 +116,7 @@ export default function MatrixPanel() {
   const detStr   = Math.abs(det) < 1e-9 ? '0' : det.toFixed(3)
   const isSingular = Math.abs(det) < 0.001
   const displayPct = Math.round(smoothStep(progress) * 100)
+  const exportPng  = useExportPng()
 
   return (
     <aside className="matrix-panel">
@@ -156,8 +158,8 @@ export default function MatrixPanel() {
 
             {/* Rows x / y / z */}
             {['x', 'y', 'z'].map((axis, row) => (
-              <>
-                <div key={`lbl-${axis}`} className="mat-row-lbl">{axis}</div>
+              <React.Fragment key={axis}>
+                <div className="mat-row-lbl">{axis}</div>
                 {[0, 1, 2].map((col) => {
                   const idx = row * 3 + col
                   return (
@@ -170,7 +172,7 @@ export default function MatrixPanel() {
                     />
                   )
                 })}
-              </>
+              </React.Fragment>
             ))}
           </div>
 
@@ -223,6 +225,7 @@ export default function MatrixPanel() {
           className="apply-btn"
           onClick={startAnimation}
           disabled={animating}
+          title="Apply transform [Space]"
         >
           {animating ? '⏳ Animating…' : '▶ Apply'}
         </button>
@@ -231,13 +234,22 @@ export default function MatrixPanel() {
           className="reset-btn"
           onClick={resetTransform}
           disabled={animating}
+          title="Reset transform [R]"
         >
           ↺ Reset
+        </button>
+        <button
+          id="export-matrix-btn"
+          className="export-btn"
+          onClick={() => exportPng('linalg-viz-matrix.png')}
+          title="Export scene to PNG [E]"
+        >
+          📷
         </button>
       </div>
 
       <p className="panel-hint">
-        Edit cells · pick a preset · ▶ Apply to animate
+        Edit cells · pick preset · <kbd className="kbd-inline">Space</kbd> apply
       </p>
     </aside>
   )
