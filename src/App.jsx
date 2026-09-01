@@ -1,21 +1,14 @@
 import { useState } from 'react'
 import VectorsPage   from './pages/VectorsPage'
 import MatricesPage  from './pages/MatricesPage'
+import ScalarsPage   from './pages/ScalarsPage'
 import ShortcutOverlay from './components/UI/ShortcutOverlay'
 import { useKeyboardShortcuts } from './hooks/useKeyboardShortcuts'
 import './App.css'
 
 const PAGES = ['Vectors', 'Matrices', 'Scalars']
 
-function ComingSoon({ name }) {
-  return (
-    <div className="coming-soon">
-      <span className="cs-icon">🚧</span>
-      <h2>{name}</h2>
-      <p>Coming soon</p>
-    </div>
-  )
-}
+
 
 export default function App() {
   const [activePage, setActivePage]       = useState('Vectors')
@@ -65,7 +58,7 @@ export default function App() {
       <main className="page-host">
         {activePage === 'Vectors'  && <VectorsPage />}
         {activePage === 'Matrices' && <MatricesPage />}
-        {activePage === 'Scalars'  && <ComingSoon name="Scalars" />}
+        {activePage === 'Scalars'  && <ScalarsPage />}
       </main>
 
       {/* Shortcut overlay */}

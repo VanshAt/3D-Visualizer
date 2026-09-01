@@ -20,6 +20,11 @@ const SHORTCUTS = {
     { keys: ['Space'], desc: 'Apply transform (animate)' },
     { keys: ['R'], desc: 'Reset transform' },
   ],
+  'Scalars': [
+    { keys: ['A'], desc: 'Add base vector' },
+    { keys: ['Del'], desc: 'Remove last base vector' },
+    { keys: ['S'], desc: 'Toggle α sweep animation' },
+  ],
   'Global': [
     { keys: ['E'], desc: 'Export scene to PNG' },
   ],

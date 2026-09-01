@@ -1,0 +1,377 @@
+/* ─── Scalar Panel ───────────────────────────────────────────────────────── */
+
+.scalar-panel {
+  width: 300px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  background: rgba(10, 15, 30, 0.88);
+  backdrop-filter: blur(16px);
+  border-left: 1px solid rgba(255, 255, 255, 0.07);
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+/* ─── Panel header ──────────────────────────────────────────────────────── */
+.scalar-panel .panel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 16px 12px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  flex-shrink: 0;
+}
+
+/* ─── Section titles ────────────────────────────────────────────────────── */
+.scalar-section {
+  padding: 12px 14px 10px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  flex-shrink: 0;
+}
+
+.scalar-section-title {
+  font-size: 0.68rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: #475569;
+  margin-bottom: 10px;
+}
+
+/* ─── Base vector cards ─────────────────────────────────────────────────── */
+.base-vec-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.base-vec-card {
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 10px;
+  background: rgba(26, 34, 53, 0.7);
+  overflow: hidden;
+  transition: border-color 0.15s;
+}
+
+.base-vec-card:hover {
+  border-color: rgba(255, 255, 255, 0.13);
+}
+
+.base-vec-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 10px 8px 12px;
+}
+
+.bv-swatch {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.bv-label-input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  font-size: 0.85rem;
+  font-weight: 600;
+  font-family: 'JetBrains Mono', monospace;
+  min-width: 0;
+}
+
+.bv-actions {
+  display: flex;
+  gap: 4px;
+}
+
+.bv-controls {
+  padding: 2px 12px 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* Reuse comp-row / comp-label / comp-slider / comp-number from VectorPanel */
+
+/* ─── Add vector button ─────────────────────────────────────────────────── */
+.add-base-btn {
+  margin-top: 8px;
+  width: 100%;
+  padding: 7px 0;
+  border-radius: 8px;
+  border: 1px dashed rgba(77, 166, 255, 0.3);
+  background: transparent;
+  color: #4da6ff;
+  font-size: 0.78rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.18s ease;
+  font-family: 'Inter', sans-serif;
+  letter-spacing: 0.3px;
+}
+
+.add-base-btn:hover {
+  background: rgba(77, 166, 255, 0.08);
+  border-color: rgba(77, 166, 255, 0.55);
+  box-shadow: 0 0 10px rgba(77, 166, 255, 0.15);
+}
+
+.add-base-btn:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+/* ─── Scalar sliders ────────────────────────────────────────────────────── */
+.scalars-section {
+  padding: 14px 14px 12px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  flex-shrink: 0;
+}
+
+.scalar-row {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.scalar-row-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.scalar-greek {
+  font-size: 1.05rem;
+  font-weight: 700;
+  font-family: 'JetBrains Mono', monospace;
+  /* color set inline per vector */
+}
+
+.scalar-value-badge {
+  font-size: 0.78rem;
+  font-family: 'JetBrains Mono', monospace;
+  color: #94a3b8;
+  min-width: 44px;
+  text-align: right;
+}
+
+.scalar-slider-wrap {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Scalar slider — oversized, color-accented via CSS variable */
+.scalar-slider {
+  flex: 1;
+  -webkit-appearance: none;
+  height: 6px;
+  border-radius: 3px;
+  background: rgba(255, 255, 255, 0.1);
+  outline: none;
+  cursor: pointer;
+  --thumb-color: #4da6ff;
+}
+
+.scalar-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--thumb-color, #4da6ff);
+  cursor: pointer;
+  box-shadow: 0 0 10px var(--thumb-color, #4da6ff), 0 0 0 3px rgba(0,0,0,0.4);
+  transition: transform 0.1s, box-shadow 0.1s;
+}
+
+.scalar-slider::-webkit-slider-thumb:hover {
+  transform: scale(1.15);
+  box-shadow: 0 0 16px var(--thumb-color, #4da6ff), 0 0 0 3px rgba(0,0,0,0.4);
+}
+
+.scalar-number {
+  width: 52px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 6px;
+  color: #f1f5f9;
+  font-size: 0.73rem;
+  font-family: 'JetBrains Mono', monospace;
+  text-align: center;
+  padding: 4px 4px;
+  outline: none;
+  -moz-appearance: textfield;
+}
+
+.scalar-number::-webkit-inner-spin-button,
+.scalar-number::-webkit-outer-spin-button { -webkit-appearance: none; }
+
+.scalar-number:focus {
+  border-color: rgba(77, 166, 255, 0.5);
+  background: rgba(77, 166, 255, 0.08);
+}
+
+/* ─── Result box ────────────────────────────────────────────────────────── */
+.result-section {
+  padding: 14px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  flex-shrink: 0;
+}
+
+.result-box {
+  background: rgba(255, 209, 102, 0.06);
+  border: 1px solid rgba(255, 209, 102, 0.25);
+  border-radius: 12px;
+  padding: 12px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.result-box-title {
+  font-size: 0.68rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.7px;
+  color: #b8884d;
+}
+
+.result-equation {
+  font-size: 0.78rem;
+  font-family: 'JetBrains Mono', monospace;
+  color: #94a3b8;
+  word-break: break-all;
+  line-height: 1.5;
+}
+
+.result-coords {
+  font-size: 0.88rem;
+  font-weight: 700;
+  font-family: 'JetBrains Mono', monospace;
+  color: #ffd166;
+  text-shadow: 0 0 12px rgba(255, 209, 102, 0.4);
+}
+
+.result-mag {
+  font-size: 0.72rem;
+  font-family: 'JetBrains Mono', monospace;
+  color: #d4a84b;
+}
+
+/* ─── Sweep controls ────────────────────────────────────────────────────── */
+.sweep-section {
+  padding: 14px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  flex-shrink: 0;
+}
+
+.sweep-buttons {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  margin-bottom: 10px;
+}
+
+.sweep-btn {
+  padding: 6px 14px;
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(26, 34, 53, 0.7);
+  color: #94a3b8;
+  font-size: 0.78rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.18s ease;
+  font-family: 'Inter', sans-serif;
+}
+
+.sweep-btn:hover {
+  background: rgba(30, 42, 66, 0.9);
+  border-color: rgba(255, 255, 255, 0.25);
+  transform: translateY(-1px);
+}
+
+.sweep-btn.active {
+  background: rgba(255, 209, 102, 0.12);
+  border-color: rgba(255, 209, 102, 0.5);
+  color: #ffd166;
+  box-shadow: 0 0 12px rgba(255, 209, 102, 0.2);
+  animation: sweepPulse 1.2s ease-in-out infinite;
+}
+
+@keyframes sweepPulse {
+  0%, 100% { box-shadow: 0 0 10px rgba(255, 209, 102, 0.2); }
+  50%       { box-shadow: 0 0 20px rgba(255, 209, 102, 0.45); }
+}
+
+.sweep-speed-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.sweep-speed-label {
+  font-size: 0.68rem;
+  color: #475569;
+  font-family: 'JetBrains Mono', monospace;
+  white-space: nowrap;
+}
+
+.sweep-speed-slider {
+  flex: 1;
+  -webkit-appearance: none;
+  height: 4px;
+  border-radius: 2px;
+  background: rgba(255, 255, 255, 0.1);
+  outline: none;
+  cursor: pointer;
+}
+
+.sweep-speed-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: #ffd166;
+  cursor: pointer;
+  box-shadow: 0 0 6px rgba(255, 209, 102, 0.5);
+}
+
+/* ─── Footer / actions ──────────────────────────────────────────────────── */
+.scalar-actions {
+  padding: 12px 14px;
+  display: flex;
+  gap: 8px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  flex-shrink: 0;
+}
+
+.scalar-export-btn {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(26, 34, 53, 0.7);
+  color: #94a3b8;
+  font-size: 0.9rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.18s ease;
+}
+
+.scalar-export-btn:hover {
+  background: rgba(30, 42, 66, 0.9);
+  border-color: rgba(77, 166, 255, 0.4);
+  transform: translateY(-1px);
+  box-shadow: 0 0 10px rgba(77, 166, 255, 0.2);
+}

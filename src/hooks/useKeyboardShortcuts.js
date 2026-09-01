@@ -1,6 +1,7 @@
 import { useEffect } from 'react'
 import { useStore } from '../state/useStore'
 import { useMatrixStore } from '../state/useMatrixStore'
+import { useScalarStore } from '../state/useScalarStore'
 import { useExportPng } from './useExportPng'
 
 /**
@@ -95,9 +96,30 @@ export function useKeyboardShortcuts(activePage, setActivePage, setShowShortcuts
           return
         }
       }
+
+      // ── Scalars page shortcuts ─────────────────────────────────────
+      if (activePage === 'Scalars') {
+        const { addVector, removeVector, toggleSweep } = useScalarStore.getState()
+
+        if (key === 'a' || key === 'A') {
+          addVector()
+          return
+        }
+
+        if (key === 'Delete' || key === 'Backspace') {
+          removeVector()
+          return
+        }
+
+        if (key === 's' || key === 'S') {
+          toggleSweep(0)  // sweep α by default
+          return
+        }
+      }
     }
 
     window.addEventListener('keydown', onKeyDown)
     return () => window.removeEventListener('keydown', onKeyDown)
   }, [activePage, setActivePage, setShowShortcuts, exportPng])
 }
+

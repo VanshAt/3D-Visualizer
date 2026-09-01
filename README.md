@@ -52,9 +52,25 @@ Visualise vectors, operations, and transformations right in your browser — no 
 
 ![Matrices page with export button alongside Apply and Reset action buttons](public/screenshots/11-day5-matrices-export.png)
 
+### Day 6 — Scalars module: linear combinations explorer
+
+![Scalars page showing base vector v₁, ghost scaled arrow, and glowing gold result arrow r](public/screenshots/12-day6-scalars-initial.png)
+
+### Day 6 — Two base vectors (v₁, v₂) with α and β sliders
+
+![Scalars page with two base vectors and result r = αv₁ + βv₂ = (2, 2, 0)](public/screenshots/13-day6-scalars-two-vectors.png)
+
+### Day 6 — Sweep active: α oscillating live
+
+![α sweep active — slider glowing, result arrow sweeping, β also visible](public/screenshots/14-day6-scalars-sweep.png)
+
+### Day 6 — Shortcut overlay with new Scalars group
+
+![Shortcut overlay updated with Scalars section: A add vector, Del remove, S sweep](public/screenshots/15-day6-shortcut-overlay-scalars.png)
+
 ---
 
-## Features (Day 5 ✅)
+## Features (Day 6 ✅)
 
 | Feature | Status |
 |---|---|
@@ -76,6 +92,11 @@ Visualise vectors, operations, and transformations right in your browser — no 
 | **Keyboard shortcuts** — A / Del / Tab / Space / R / 1–2–3 / E / ? | ✅ |
 | **Export-to-PNG** — canvas screenshot download | ✅ |
 | **Shortcut overlay** — ? key opens cheat-sheet modal | ✅ |
+| **Scalars module** — linear combinations αv₁ + βv₂ + γv₃ | ✅ |
+| **Scalar sliders** — per-vector α/β/γ with colour-accented oversized thumb | ✅ |
+| **Result arrow** — glowing gold Σ αᵢvᵢ with animated emissive pulse | ✅ |
+| **Ghost scaled arrows** — semi-transparent αᵢvᵢ pieces | ✅ |
+| **Sweep animation** — oscillate any scalar to trace spanning set live | ✅ |
 
 
 ---
@@ -85,12 +106,13 @@ Visualise vectors, operations, and transformations right in your browser — no 
 | Key | Action |
 |---|---|
 | `1` / `2` / `3` | Switch page (Vectors / Matrices / Scalars) |
-| `A` | Add vector (Vectors page) |
-| `Delete` | Delete selected vector |
+| `A` | Add vector (Vectors) · Add base vector (Scalars) |
+| `Delete` | Delete selected vector (Vectors) · Remove last base vector (Scalars) |
 | `H` | Hide / show selected vector |
 | `Tab` / `Shift+Tab` | Cycle selection forward / backward |
 | `Space` | Toggle span (Vectors) · Apply transform (Matrices) |
 | `R` | Reset matrix transform |
+| `S` | Toggle α sweep animation (Scalars) |
 | `E` | Export scene to PNG |
 | `?` | Open / close shortcut overlay |
 | `Escape` | Deselect / close overlay |
@@ -145,6 +167,7 @@ src/
 - **Day 3** — Matrix transforms, 3D click-to-select, animated lerp between states
 - **Day 4** — Span visualisation, eigenvalue/eigenvector explorer
 - **Day 5** — Keyboard shortcuts, export-to-PNG, shortcut overlay ✅
+- **Day 6** — Scalars module: linear combinations, sweep animation, ghost arrows ✅
 
 ---
 
