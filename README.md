@@ -84,6 +84,10 @@ Visualise vectors, operations, and transformations right in your browser — no 
 
 ![Shortcut overlay updated with Project section: A, T, N, P shortcuts](public/screenshots/21-day7-shortcut-overlay-project.png)
 
+### Day 8 — Cross Product Explorer
+
+![Cross Product Explorer showing u, v, u x v, and parallelogram area](public/screenshots/21-day8-cross-initial.png)
+
 ---
 
 ## Features (Day 8 ✅)
