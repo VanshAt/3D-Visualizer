@@ -150,7 +150,7 @@ function ComplexEigenViz({ re, im, magnitude: mod, angleDeg, v1, v2 }) {
       <EigenArrow
         end={imageEnd}
         color={color}
-        label={`|?|=${mod.toFixed(2)} ?${angleDeg.toFixed(0)}°`}
+        label={`|?|=${mod.toFixed(2)} ?${angleDeg.toFixed(0)}Â°`}
         opacity={0.95}
       />
     </group>

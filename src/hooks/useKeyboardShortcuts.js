@@ -2,12 +2,13 @@ import { useEffect } from 'react'
 import { useStore } from '../state/useStore'
 import { useMatrixStore } from '../state/useMatrixStore'
 import { useScalarStore } from '../state/useScalarStore'
+import { useProjectionStore } from '../state/useProjectionStore'
 import { useExportPng } from './useExportPng'
 
 /**
  * Global keyboard shortcut handler — mount once at App level.
  *
- * @param {string}   activePage     - 'Vectors' | 'Matrices' | 'Scalars'
+ * @param {string}   activePage     - 'Vectors' | 'Matrices' | 'Scalars' | 'Project'
  * @param {Function} setActivePage  - page setter
  * @param {Function} setShowShortcuts - toggle the shortcut overlay
  */
@@ -26,6 +27,8 @@ export function useKeyboardShortcuts(activePage, setActivePage, setShowShortcuts
       if (key === '1') { setActivePage('Vectors');  return }
       if (key === '2') { setActivePage('Matrices'); return }
       if (key === '3') { setActivePage('Scalars');  return }
+      if (key === '4') { setActivePage('Project');  return }
+      if (key === '5') { setActivePage('Cross');    return }
 
       // ── Overlay ────────────────────────────────────────────────────
       if (key === '?') { setShowShortcuts(prev => !prev); return }
@@ -83,7 +86,10 @@ export function useKeyboardShortcuts(activePage, setActivePage, setShowShortcuts
 
       // ── Matrices page shortcuts ────────────────────────────────────
       if (activePage === 'Matrices') {
-        const { animating, startAnimation, resetTransform } = useMatrixStore.getState()
+        const { animating, startAnimation, resetTransform,
+                showParallelepiped, setShowParallelepiped,
+                showInverse, toggleInverse,
+                showCramer, toggleCramer } = useMatrixStore.getState()
 
         if (key === ' ') {
           e.preventDefault()
@@ -93,6 +99,21 @@ export function useKeyboardShortcuts(activePage, setActivePage, setShowShortcuts
 
         if (key === 'r' || key === 'R') {
           resetTransform()
+          return
+        }
+
+        if (key === 'v' || key === 'V') {
+          setShowParallelepiped(!showParallelepiped)
+          return
+        }
+
+        if (key === 'i' || key === 'I') {
+          toggleInverse()
+          return
+        }
+
+        if (key === 'c' || key === 'C') {
+          toggleCramer()
           return
         }
       }
@@ -113,6 +134,38 @@ export function useKeyboardShortcuts(activePage, setActivePage, setShowShortcuts
 
         if (key === 's' || key === 'S') {
           toggleSweep(0)  // sweep α by default
+          return
+        }
+      }
+
+      // ── Project page shortcuts ──────────────────────────────────────
+      if (activePage === 'Project') {
+        const store = useProjectionStore.getState()
+
+        if (key === 'a' || key === 'A') {
+          if (store.mode === 'project') store.addBase()
+          else store.addGsVector()
+          return
+        }
+
+        if (key === 'Delete' || key === 'Backspace') {
+          if (store.mode === 'project') store.removeBase()
+          else store.removeGsVector()
+          return
+        }
+
+        if (key === 't' || key === 'T') {
+          store.toggleMode()
+          return
+        }
+
+        if (key === 'n' || key === 'N') {
+          store.nextGsStep()
+          return
+        }
+
+        if (key === 'p' || key === 'P') {
+          store.toggleGsPlay()
           return
         }
       }

@@ -1,0 +1,190 @@
+/* ─── Cross Panel ──────────────────────────────────────────────────── */
+
+.cross-panel {
+  width: 300px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  background: rgba(10, 15, 30, 0.88);
+  backdrop-filter: blur(16px);
+  border-left: 1px solid rgba(255, 255, 255, 0.07);
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.cross-panel .panel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 16px 12px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  flex-shrink: 0;
+}
+
+.cross-panel .panel-title {
+  font-size: 1rem;
+  font-weight: 700;
+  background: linear-gradient(135deg, #fb923c, #ef4444);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.cross-section {
+  padding: 12px 14px 10px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  flex-shrink: 0;
+}
+
+.cross-section-title {
+  font-size: 0.68rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: #475569;
+  margin-bottom: 10px;
+}
+
+.cross-vec-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.cross-vec-card {
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 10px;
+  background: rgba(26, 34, 53, 0.7);
+  overflow: hidden;
+  transition: border-color 0.15s;
+}
+
+.cross-vec-card:hover {
+  border-color: rgba(255, 255, 255, 0.13);
+}
+
+.cross-vec-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 10px 8px 12px;
+}
+
+.cross-vec-label {
+  flex: 1;
+  font-size: 0.85rem;
+  font-weight: 600;
+  font-family: 'JetBrains Mono', monospace;
+  color: #e2e8f0;
+}
+
+.cross-vec-controls {
+  padding: 2px 12px 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.cross-vec-controls .comp-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.cross-vec-controls .comp-label {
+  width: 14px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  font-family: 'JetBrains Mono', monospace;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.cross-vec-controls .comp-slider {
+  flex: 1;
+  -webkit-appearance: none;
+  height: 4px;
+  border-radius: 2px;
+  background: rgba(255, 255, 255, 0.1);
+  outline: none;
+  cursor: pointer;
+}
+
+.cross-vec-controls .comp-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--thumb-color, #4da6ff);
+  cursor: pointer;
+  box-shadow: 0 0 6px rgba(255, 255, 255, 0.2);
+}
+
+.cross-vec-controls .comp-number {
+  width: 48px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 6px;
+  color: #f1f5f9;
+  font-size: 0.72rem;
+  font-family: 'JetBrains Mono', monospace;
+  text-align: center;
+  padding: 3px 4px;
+  outline: none;
+  -moz-appearance: textfield;
+}
+
+.cross-vec-controls .comp-number::-webkit-inner-spin-button,
+.cross-vec-controls .comp-number::-webkit-outer-spin-button { -webkit-appearance: none; }
+
+.cross-vec-controls .comp-number:focus {
+  border-color: rgba(255, 255, 255, 0.3);
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.cross-stats-box {
+  margin: 12px 14px;
+  padding: 12px 14px;
+  background: rgba(251, 146, 60, 0.05);
+  border: 1px solid rgba(251, 146, 60, 0.2);
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.cross-stats-title {
+  font-size: 0.68rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.7px;
+  color: #c27635;
+  margin-bottom: 2px;
+}
+
+.cross-stat-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.cross-stat-label {
+  font-size: 0.74rem;
+  font-family: 'JetBrains Mono', monospace;
+  color: #64748b;
+}
+
+.cross-stat-value {
+  font-size: 0.8rem;
+  font-weight: 600;
+  font-family: 'JetBrains Mono', monospace;
+  color: #e2e8f0;
+}
+
+.cross-stat-coords {
+  font-size: 0.72rem;
+  color: #fb923c;
+  text-shadow: 0 0 8px rgba(251, 146, 60, 0.3);
+}

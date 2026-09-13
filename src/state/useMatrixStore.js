@@ -52,4 +52,23 @@ export const useMatrixStore = create((set) => ({
   // ── eigenvector display ────────────────────────────────────────────────────
   showEigenvectors:    true,
   setShowEigenvectors: (b) => set({ showEigenvectors: b }),
+
+  // ── parallelepiped display ─────────────────────────────────────────────────
+  showParallelepiped:    true,
+  setShowParallelepiped: (b) => set({ showParallelepiped: b }),
+
+  // ── inverse section ────────────────────────────────────────────────────────
+  showInverse: false,
+  toggleInverse: () => set((s) => ({ showInverse: !s.showInverse })),
+
+  // ── Cramer's Rule section ──────────────────────────────────────────────────
+  showCramer: false,
+  toggleCramer: () => set((s) => ({ showCramer: !s.showCramer })),
+  cramerB: [1, 0, 0],
+  setCramerB: (i, val) =>
+    set((s) => {
+      const b = [...s.cramerB]
+      b[i] = isNaN(val) ? 0 : val
+      return { cramerB: b }
+    }),
 }))

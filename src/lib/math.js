@@ -107,6 +107,74 @@ export const gramSchmidtBasis = (vecs) => {
 /** Rank (0–3) of the vector set — number of linearly independent vectors. */
 export const gramSchmidtRank = (vecs) => gramSchmidtBasis(vecs).length
 
+// ─── Projection helpers ──────────────────────────────────────────────────────
+
+/** Project vector b onto vector a:  (b·a / a·a) * a */
+export const project1D = (b, a) => {
+  const d = dot(a, a)
+  if (d < 1e-12) return [0, 0, 0]
+  return scale(a, dot(b, a) / d)
+}
+
+/** Project b onto the subspace spanned by bases (up to 2 vectors) */
+export const projectSubspace = (b, bases) => {
+  if (bases.length === 0) return [0, 0, 0]
+  if (bases.length === 1) return project1D(b, bases[0])
+  // Orthogonalise a2 against a1, then sum projections
+  const a1 = bases[0]
+  const a2orth = sub(bases[1], project1D(bases[1], a1))
+  return add(project1D(b, a1), project1D(b, a2orth))
+}
+
+// ─── Matrix transpose (3×3, row-major) ───────────────────────────────────────
+
+export const mat3Transpose = ([a,b,c, d,e,f, g,h,i]) => [a,d,g, b,e,h, c,f,i]
+
+// ─── Cofactor matrix (3×3, row-major) ────────────────────────────────────────
+
+export const mat3Cofactor = ([a,b,c, d,e,f, g,h,i]) => [
+   (e*i - f*h), -(d*i - f*g),  (d*h - e*g),
+  -(b*i - c*h),  (a*i - c*g), -(a*h - b*g),
+   (b*f - c*e), -(a*f - c*d),  (a*e - b*d),
+]
+
+// ─── Matrix inverse (3×3) — returns null when singular ───────────────────────
+
+export const mat3Inverse = (M) => {
+  const d = det3(M)
+  if (Math.abs(d) < 1e-10) return null
+  const C = mat3Cofactor(M)
+  const adj = mat3Transpose(C)
+  return adj.map(v => v / d)
+}
+
+// ─── Cramer's Rule solver  Ax = b ────────────────────────────────────────────
+
+/**
+ * Solves the 3×3 system  M·x = b  via Cramer's Rule.
+ * Returns { x: [x1,x2,x3], dets: [detA1,detA2,detA3], detA } or null if singular.
+ */
+export const cramerSolve = (M, b) => {
+  const detA = det3(M)
+  if (Math.abs(detA) < 1e-10) return null
+
+  // Replace column j with b → compute det
+  const replaceCol = (col) => {
+    const A = [...M]
+    A[0 + col] = b[0]  // row 0
+    A[3 + col] = b[1]  // row 1
+    A[6 + col] = b[2]  // row 2
+    return det3(A)
+  }
+
+  const dets = [replaceCol(0), replaceCol(1), replaceCol(2)]
+  return {
+    x: [dets[0] / detA, dets[1] / detA, dets[2] / detA],
+    dets,
+    detA,
+  }
+}
+
 // ─── Cubic polynomial root finder ────────────────────────────────────────────
 
 /**

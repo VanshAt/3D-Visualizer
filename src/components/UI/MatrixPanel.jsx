@@ -1,6 +1,6 @@
 import React, { useState, useMemo } from 'react'
 import { useMatrixStore, PRESETS } from '../../state/useMatrixStore'
-import { det3, smoothStep, fmt, eigenSolve3, eigenColor, complexEigenColor } from '../../lib/math'
+import { det3, smoothStep, fmt, eigenSolve3, eigenColor, complexEigenColor, mat3Inverse, cramerSolve } from '../../lib/math'
 import { useExportPng } from '../../hooks/useExportPng'
 import './MatrixPanel.css'
 
@@ -100,6 +100,127 @@ function EigenSection({ matrix, showEigenvectors, setShowEigenvectors }) {
   )
 }
 
+// ─── Inverse matrix section ──────────────────────────────────────────────────
+function InverseSection({ matrix, showInverse, toggleInverse }) {
+  const inv = useMemo(() => mat3Inverse(matrix), [matrix])
+  const isSingular = inv === null
+  const fmtV = (n) => (Math.abs(n) < 1e-10 ? '0' : parseFloat(n.toFixed(4)))
+
+  return (
+    <div className="inverse-section">
+      <div className="inverse-section-header">
+        <p className="annotation-title">Inverse M⁻¹</p>
+        <button
+          id="inverse-toggle-btn"
+          className={`eigen-vis-btn ${showInverse ? 'active' : ''}`}
+          onClick={toggleInverse}
+          title={showInverse ? 'Hide inverse' : 'Show inverse'}
+        >
+          {showInverse ? '▾ Hide' : '▸ Show'}
+        </button>
+      </div>
+
+      {showInverse && (
+        <div className="inverse-body">
+          {isSingular ? (
+            <p className="inverse-singular">⚠ No inverse (singular matrix)</p>
+          ) : (
+            <div className="inverse-grid">
+              {[0, 1, 2].map((row) => (
+                <React.Fragment key={row}>
+                  {[0, 1, 2].map((col) => {
+                    const idx = row * 3 + col
+                    return (
+                      <span
+                        key={idx}
+                        className={`inverse-cell ${row === col ? 'diag' : ''}`}
+                      >
+                        {fmtV(inv[idx])}
+                      </span>
+                    )
+                  })}
+                </React.Fragment>
+              ))}
+            </div>
+          )}
+        </div>
+      )}
+    </div>
+  )
+}
+
+// ─── Cramer's Rule section ───────────────────────────────────────────────────
+function CramerSection({ matrix, showCramer, toggleCramer }) {
+  const cramerB    = useMatrixStore((s) => s.cramerB)
+  const setCramerB = useMatrixStore((s) => s.setCramerB)
+  const result     = useMemo(() => cramerSolve(matrix, cramerB), [matrix, cramerB])
+  const isSingular = result === null
+  const fmtV       = (n) => parseFloat(n.toFixed(4))
+  const labels     = ['x₁', 'x₂', 'x₃']
+  const bLabels    = ['b₁', 'b₂', 'b₃']
+
+  return (
+    <div className="cramer-section">
+      <div className="cramer-section-header">
+        <p className="annotation-title">Solve Ax = b</p>
+        <button
+          id="cramer-toggle-btn"
+          className={`eigen-vis-btn ${showCramer ? 'active' : ''}`}
+          onClick={toggleCramer}
+          title={showCramer ? 'Hide solver' : 'Show solver'}
+        >
+          {showCramer ? '▾ Hide' : '▸ Show'}
+        </button>
+      </div>
+
+      {showCramer && (
+        <div className="cramer-body">
+          {/* b-vector inputs */}
+          <div className="cramer-b-row">
+            <span className="cramer-b-label">b =</span>
+            <span className="cramer-b-paren">(</span>
+            {[0, 1, 2].map((i) => (
+              <React.Fragment key={i}>
+                <div className="cramer-b-input-wrap">
+                  <label className="cramer-b-sub">{bLabels[i]}</label>
+                  <input
+                    type="number"
+                    step={0.1}
+                    className="cramer-input"
+                    value={cramerB[i]}
+                    onChange={(e) => setCramerB(i, parseFloat(e.target.value))}
+                    aria-label={bLabels[i]}
+                  />
+                </div>
+                {i < 2 && <span className="cramer-b-comma">,</span>}
+              </React.Fragment>
+            ))}
+            <span className="cramer-b-paren">)</span>
+          </div>
+
+          {/* Solution */}
+          {isSingular ? (
+            <p className="cramer-singular">⚠ System has no unique solution (det = 0)</p>
+          ) : (
+            <div className="cramer-solution">
+              <p className="cramer-sol-title">Solution x = M⁻¹b</p>
+              {result.x.map((xi, i) => (
+                <div key={i} className="cramer-sol-row">
+                  <span className="cramer-sol-label">{labels[i]}</span>
+                  <span className="cramer-sol-value">{fmtV(xi)}</span>
+                  <span className="cramer-sol-ratio">
+                    det(A{i+1}) / det(A) = {fmtV(result.dets[i])} / {fmtV(result.detA)}
+                  </span>
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+      )}
+    </div>
+  )
+}
+
 // ─── Main panel ───────────────────────────────────────────────────────────────
 export default function MatrixPanel() {
   const matrix             = useMatrixStore((s) => s.matrix)
@@ -111,6 +232,12 @@ export default function MatrixPanel() {
   const resetTransform     = useMatrixStore((s) => s.resetTransform)
   const showEigenvectors   = useMatrixStore((s) => s.showEigenvectors)
   const setShowEigenvectors = useMatrixStore((s) => s.setShowEigenvectors)
+  const showParallelepiped  = useMatrixStore((s) => s.showParallelepiped)
+  const setShowParallelepiped = useMatrixStore((s) => s.setShowParallelepiped)
+  const showInverse        = useMatrixStore((s) => s.showInverse)
+  const toggleInverse      = useMatrixStore((s) => s.toggleInverse)
+  const showCramer         = useMatrixStore((s) => s.showCramer)
+  const toggleCramer       = useMatrixStore((s) => s.toggleCramer)
 
   const det      = det3(matrix)
   const detStr   = Math.abs(det) < 1e-9 ? '0' : det.toFixed(3)
@@ -192,6 +319,14 @@ export default function MatrixPanel() {
             ⚠ singular
           </span>
         )}
+        <button
+          id="piped-toggle-btn"
+          className={`piped-toggle ${showParallelepiped ? 'active' : ''}`}
+          onClick={() => setShowParallelepiped(!showParallelepiped)}
+          title={showParallelepiped ? 'Hide parallelepiped' : 'Show parallelepiped'}
+        >
+          {showParallelepiped ? '🧊' : '▢'}
+        </button>
       </div>
 
       {/* ── Basis image annotations ──────────────────────────────────── */}
@@ -202,6 +337,20 @@ export default function MatrixPanel() {
         matrix={matrix}
         showEigenvectors={showEigenvectors}
         setShowEigenvectors={setShowEigenvectors}
+      />
+
+      {/* ── Inverse section ───────────────────────────────────────────── */}
+      <InverseSection
+        matrix={matrix}
+        showInverse={showInverse}
+        toggleInverse={toggleInverse}
+      />
+
+      {/* ── Cramer's Rule section ─────────────────────────────────────── */}
+      <CramerSection
+        matrix={matrix}
+        showCramer={showCramer}
+        toggleCramer={toggleCramer}
       />
 
       {/* ── Animation progress bar ───────────────────────────────────── */}

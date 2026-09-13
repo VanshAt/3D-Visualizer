@@ -5,6 +5,8 @@ const SHORTCUTS = {
     { keys: ['1'], desc: 'Vectors page' },
     { keys: ['2'], desc: 'Matrices page' },
     { keys: ['3'], desc: 'Scalars page' },
+    { keys: ['4'], desc: 'Project page' },
+    { keys: ['5'], desc: 'Cross page' },
     { keys: ['Esc'], desc: 'Deselect / close' },
     { keys: ['?'], desc: 'Toggle this overlay' },
   ],
@@ -19,11 +21,20 @@ const SHORTCUTS = {
   'Matrices': [
     { keys: ['Space'], desc: 'Apply transform (animate)' },
     { keys: ['R'], desc: 'Reset transform' },
+    { keys: ['V'], desc: 'Toggle parallelepiped volume' },
+    { keys: ['I'], desc: 'Toggle inverse M⁻¹ panel' },
+    { keys: ['C'], desc: 'Toggle Cramer\'s Rule solver' },
   ],
   'Scalars': [
     { keys: ['A'], desc: 'Add base vector' },
     { keys: ['Del'], desc: 'Remove last base vector' },
     { keys: ['S'], desc: 'Toggle α sweep animation' },
+  ],
+  'Project': [
+    { keys: ['A'], desc: 'Add base vector' },
+    { keys: ['T'], desc: 'Toggle mode (Projection / Gram-Schmidt)' },
+    { keys: ['N'], desc: 'Next Gram-Schmidt step' },
+    { keys: ['P'], desc: 'Toggle auto-play G-S' },
   ],
   'Global': [
     { keys: ['E'], desc: 'Export scene to PNG' },

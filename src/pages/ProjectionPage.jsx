@@ -1,11 +1,9 @@
 import { Canvas, useThree } from '@react-three/fiber'
 import { Suspense } from 'react'
-import SceneSetup  from '../components/Scene/SceneSetup'
-import Axes        from '../components/Scene/Axes'
-import BasisArrows    from '../components/Scene/BasisArrows'
-import EigenArrows    from '../components/Scene/EigenArrows'
-import Parallelepiped from '../components/Scene/Parallelepiped'
-import MatrixPanel from '../components/UI/MatrixPanel'
+import ProjectionScene   from '../components/Scene/ProjectionScene'
+import GramSchmidtScene  from '../components/Scene/GramSchmidtScene'
+import ProjectionPanel   from '../components/UI/ProjectionPanel'
+import { useProjectionStore } from '../state/useProjectionStore'
 import { CanvasRefContext, useCanvasRefValue } from '../context/CanvasRefContext'
 
 /** Captures the R3F gl renderer into our context ref */
@@ -15,20 +13,17 @@ function GlCapture({ glRef }) {
   return null
 }
 
-function MatrixScene({ glRef }) {
+function ProjectionCanvas({ glRef }) {
+  const mode = useProjectionStore((s) => s.mode)
   return (
     <>
       <GlCapture glRef={glRef} />
-      <SceneSetup />
-      <Axes />
-      <BasisArrows />
-      <EigenArrows />
-      <Parallelepiped />
+      {mode === 'project' ? <ProjectionScene /> : <GramSchmidtScene />}
     </>
   )
 }
 
-export default function MatricesPage() {
+export default function ProjectionPage() {
   const glRef = useCanvasRefValue()
 
   return (
@@ -37,19 +32,19 @@ export default function MatricesPage() {
         {/* 3D Canvas */}
         <div className="canvas-container">
           <Canvas
-            camera={{ position: [3.5, 2.5, 4.5], fov: 55, near: 0.1, far: 100 }}
+            camera={{ position: [6, 5, 8], fov: 55, near: 0.1, far: 100 }}
             gl={{ antialias: true, alpha: false, preserveDrawingBuffer: true }}
             shadows
           >
             <color attach="background" args={['#0a0f1e']} />
             <Suspense fallback={null}>
-              <MatrixScene glRef={glRef} />
+              <ProjectionCanvas glRef={glRef} />
             </Suspense>
           </Canvas>
         </div>
 
         {/* Side panel */}
-        <MatrixPanel />
+        <ProjectionPanel />
       </div>
     </CanvasRefContext.Provider>
   )

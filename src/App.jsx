@@ -1,12 +1,14 @@
 import { useState } from 'react'
-import VectorsPage   from './pages/VectorsPage'
-import MatricesPage  from './pages/MatricesPage'
-import ScalarsPage   from './pages/ScalarsPage'
+import VectorsPage    from './pages/VectorsPage'
+import MatricesPage   from './pages/MatricesPage'
+import ScalarsPage    from './pages/ScalarsPage'
+import ProjectionPage from './pages/ProjectionPage'
+import CrossPage      from './pages/CrossPage'
 import ShortcutOverlay from './components/UI/ShortcutOverlay'
 import { useKeyboardShortcuts } from './hooks/useKeyboardShortcuts'
 import './App.css'
 
-const PAGES = ['Vectors', 'Matrices', 'Scalars']
+const PAGES = ['Vectors', 'Matrices', 'Scalars', 'Project', 'Cross']
 
 
 
@@ -59,6 +61,8 @@ export default function App() {
         {activePage === 'Vectors'  && <VectorsPage />}
         {activePage === 'Matrices' && <MatricesPage />}
         {activePage === 'Scalars'  && <ScalarsPage />}
+        {activePage === 'Project'  && <ProjectionPage />}
+        {activePage === 'Cross'    && <CrossPage />}
       </main>
 
       {/* Shortcut overlay */}

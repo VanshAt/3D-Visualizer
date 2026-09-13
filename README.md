@@ -68,9 +68,25 @@ Visualise vectors, operations, and transformations right in your browser — no 
 
 ![Shortcut overlay updated with Scalars section: A add vector, Del remove, S sweep](public/screenshots/15-day6-shortcut-overlay-scalars.png)
 
+### Day 7 — Projection mode: project b onto a
+
+![Projection page showing base vector a, target b, cyan projection arrow, and red residual with right-angle marker](public/screenshots/18-day7-projection-initial.png)
+
+### Day 7 — Two base vectors (subspace projection)
+
+![Projection onto a 2D subspace spanned by a1 and a2, residual nearly zero](public/screenshots/19-day7-projection-subspace.png)
+
+### Day 7 — Gram-Schmidt mode: step-by-step orthonormalisation
+
+![Gram-Schmidt page with 3 input vectors and 2 orthonormal basis vectors lit up](public/screenshots/20-day7-gram-schmidt-steps.png)
+
+### Day 7 — Shortcut overlay with new Project group
+
+![Shortcut overlay updated with Project section: A, T, N, P shortcuts](public/screenshots/21-day7-shortcut-overlay-project.png)
+
 ---
 
-## Features (Day 6 ✅)
+## Features (Day 8 ✅)
 
 | Feature | Status |
 |---|---|
@@ -83,13 +99,13 @@ Visualise vectors, operations, and transformations right in your browser — no 
 | Colour picker per vector | ✅ |
 | Selection pulse animation | ✅ |
 | Vector operations panel — dot · cross × angle | ✅ |
-| Page routing — Vectors / Matrices / Scalars nav | ✅ |
+| Page routing — Vectors / Matrices / Scalars / Project nav | ✅ |
 | **Matrices module** — 3×3 editable matrix panel + presets | ✅ |
 | **Matrix transform animation** — basis vectors lerp with smoothstep | ✅ |
 | **Click-to-select in 3D** — raycasting via R3F onClick | ✅ |
 | **Span visualisation** — plane/line mesh, live rank badge | ✅ |
 | **Eigenvalue explorer** — real + complex eigen display, 3D arrows | ✅ |
-| **Keyboard shortcuts** — A / Del / Tab / Space / R / 1–2–3 / E / ? | ✅ |
+| **Keyboard shortcuts** — A / Del / Tab / Space / R / 1–2–3–4 / E / ? | ✅ |
 | **Export-to-PNG** — canvas screenshot download | ✅ |
 | **Shortcut overlay** — ? key opens cheat-sheet modal | ✅ |
 | **Scalars module** — linear combinations αv₁ + βv₂ + γv₃ | ✅ |
@@ -97,6 +113,13 @@ Visualise vectors, operations, and transformations right in your browser — no 
 | **Result arrow** — glowing gold Σ αᵢvᵢ with animated emissive pulse | ✅ |
 | **Ghost scaled arrows** — semi-transparent αᵢvᵢ pieces | ✅ |
 | **Sweep animation** — oscillate any scalar to trace spanning set live | ✅ |
+| **Projection module** — project b onto a (or subspace), cyan proj + red residual | ✅ |
+| **Right-angle marker** — small white square at foot of perpendicular | ✅ |
+| **Subspace projection** — project onto 2-base subspace via Gram-Schmidt | ✅ |
+| **Gram-Schmidt visualiser** — step-by-step orthonormalisation with auto-play | ✅ |
+| **GS intermediate arrows** — grey semi-transparent orthogonalised vectors | ✅ |
+| **GS output arrows** — gold e₁, teal e₂, magenta e₃ with pulsing glow | ✅ |
+| **Cross Product module** — visualise $u \times v$, parallelogram area, right-hand rule | ✅ |
 
 
 ---
@@ -105,14 +128,17 @@ Visualise vectors, operations, and transformations right in your browser — no 
 
 | Key | Action |
 |---|---|
-| `1` / `2` / `3` | Switch page (Vectors / Matrices / Scalars) |
-| `A` | Add vector (Vectors) · Add base vector (Scalars) |
-| `Delete` | Delete selected vector (Vectors) · Remove last base vector (Scalars) |
+| `1` / `2` / `3` / `4` / `5` | Switch page (Vectors / Matrices / Scalars / Project / Cross) |
+| `A` | Add vector (Vectors) · Add base vector (Scalars / Project) |
+| `Delete` | Delete selected vector (Vectors) · Remove last base vector (Scalars / Project) |
 | `H` | Hide / show selected vector |
 | `Tab` / `Shift+Tab` | Cycle selection forward / backward |
 | `Space` | Toggle span (Vectors) · Apply transform (Matrices) |
 | `R` | Reset matrix transform |
 | `S` | Toggle α sweep animation (Scalars) |
+| `T` | Toggle Projection / Gram-Schmidt mode (Project) |
+| `N` | Next Gram-Schmidt step (Project) |
+| `P` | Toggle auto-play Gram-Schmidt (Project) |
 | `E` | Export scene to PNG |
 | `?` | Open / close shortcut overlay |
 | `Escape` | Deselect / close overlay |
@@ -145,19 +171,29 @@ Then open **http://localhost:5173/**
 ```
 src/
 ├── lib/
-│   └── math.js              # Pure vector math (add, dot, cross, angle …)
+│   └── math.js              # Pure vector math (add, dot, cross, angle, project …)
 ├── state/
-│   └── useStore.js          # Zustand store — vectors[], selectedId, actions
+│   ├── useStore.js          # Zustand store — vectors[], selectedId, actions
+│   ├── useMatrixStore.js    # Matrices module state
+│   ├── useScalarStore.js    # Scalars module state
+│   └── useProjectionStore.js# Projection & Gram-Schmidt state
 ├── components/
 │   ├── Scene/
 │   │   ├── SceneSetup.jsx   # Lights, grid, fog, OrbitControls
 │   │   ├── Axes.jsx         # XYZ axis lines + labels
-│   │   └── VectorArrow.jsx  # 3D arrow (shaft + cone) with labels
+│   │   ├── VectorArrow.jsx  # 3D arrow (shaft + cone) with labels
+│   │   ├── ProjectionScene.jsx  # Projection mode 3D scene
+│   │   └── GramSchmidtScene.jsx # Gram-Schmidt mode 3D scene
 │   └── UI/
 │       ├── VectorPanel.jsx  # Side panel — cards, sliders, ops
-│       └── VectorPanel.css
+│       ├── VectorPanel.css
+│       ├── ProjectionPanel.jsx  # Projection / GS side panel
+│       └── ProjectionPanel.css
 └── pages/
-    └── VectorsPage.jsx      # Canvas + panel layout
+    ├── VectorsPage.jsx      # Canvas + panel layout
+    ├── MatricesPage.jsx
+    ├── ScalarsPage.jsx
+    └── ProjectionPage.jsx   # Projection / Gram-Schmidt page
 ```
 
 ---
@@ -168,7 +204,10 @@ src/
 - **Day 4** — Span visualisation, eigenvalue/eigenvector explorer
 - **Day 5** — Keyboard shortcuts, export-to-PNG, shortcut overlay ✅
 - **Day 6** — Scalars module: linear combinations, sweep animation, ghost arrows ✅
+- **Day 7** — Projection & Gram-Schmidt: project onto vectors/subspaces, step-by-step orthonormalisation ✅
+- **Day 8** — Cross Product Explorer: orthogonal vector, parallelogram area, right-hand rule ✅
 
 ---
 
 *Built day by day 🛠 — follow along as the modules grow.*
+
