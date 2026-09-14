@@ -88,9 +88,13 @@ Visualise vectors, operations, and transformations right in your browser — no 
 
 ![Cross Product Explorer showing u, v, u x v, and parallelogram area](public/screenshots/21-day8-cross-initial.png)
 
+### Day 9 — Transformations Explorer
+
+![Transformations Explorer showing scale, rotate, and shear sliders with a multicoloured cube](public/screenshots/22-day9-transform-explorer.png)
+
 ---
 
-## Features (Day 8 ✅)
+## Features (Day 9 ✅)
 
 | Feature | Status |
 |---|---|
@@ -103,13 +107,13 @@ Visualise vectors, operations, and transformations right in your browser — no 
 | Colour picker per vector | ✅ |
 | Selection pulse animation | ✅ |
 | Vector operations panel — dot · cross × angle | ✅ |
-| Page routing — Vectors / Matrices / Scalars / Project nav | ✅ |
+| Page routing — Vectors / Matrices / Scalars / Project / Cross / Transform nav | ✅ |
 | **Matrices module** — 3×3 editable matrix panel + presets | ✅ |
 | **Matrix transform animation** — basis vectors lerp with smoothstep | ✅ |
 | **Click-to-select in 3D** — raycasting via R3F onClick | ✅ |
 | **Span visualisation** — plane/line mesh, live rank badge | ✅ |
 | **Eigenvalue explorer** — real + complex eigen display, 3D arrows | ✅ |
-| **Keyboard shortcuts** — A / Del / Tab / Space / R / 1–2–3–4 / E / ? | ✅ |
+| **Keyboard shortcuts** — A / Del / Tab / Space / R / 1–2–3–4–5–6 / E / ? | ✅ |
 | **Export-to-PNG** — canvas screenshot download | ✅ |
 | **Shortcut overlay** — ? key opens cheat-sheet modal | ✅ |
 | **Scalars module** — linear combinations αv₁ + βv₂ + γv₃ | ✅ |
@@ -124,6 +128,9 @@ Visualise vectors, operations, and transformations right in your browser — no 
 | **GS intermediate arrows** — grey semi-transparent orthogonalised vectors | ✅ |
 | **GS output arrows** — gold e₁, teal e₂, magenta e₃ with pulsing glow | ✅ |
 | **Cross Product module** — visualise $u \times v$, parallelogram area, right-hand rule | ✅ |
+| **Transformations Explorer module** — interactively compose Scale, Rotate, and Shear | ✅ |
+| **Live composed matrix** — watch the 3x3 matrix update instantly during slider drag | ✅ |
+| **Multicoloured cube** — clear visualisation of 3D deformations | ✅ |
 
 
 ---
@@ -132,13 +139,13 @@ Visualise vectors, operations, and transformations right in your browser — no 
 
 | Key | Action |
 |---|---|
-| `1` / `2` / `3` / `4` / `5` | Switch page (Vectors / Matrices / Scalars / Project / Cross) |
+| `1` / `2` / `3` / `4` / `5` / `6` | Switch page (Vectors / Matrices / Scalars / Project / Cross / Transform) |
 | `A` | Add vector (Vectors) · Add base vector (Scalars / Project) |
 | `Delete` | Delete selected vector (Vectors) · Remove last base vector (Scalars / Project) |
 | `H` | Hide / show selected vector |
 | `Tab` / `Shift+Tab` | Cycle selection forward / backward |
 | `Space` | Toggle span (Vectors) · Apply transform (Matrices) |
-| `R` | Reset matrix transform |
+| `R` | Reset matrix transform (Matrices, Transform) |
 | `S` | Toggle α sweep animation (Scalars) |
 | `T` | Toggle Projection / Gram-Schmidt mode (Project) |
 | `N` | Next Gram-Schmidt step (Project) |

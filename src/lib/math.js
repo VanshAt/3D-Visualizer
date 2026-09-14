@@ -50,6 +50,12 @@ export const det3 = ([a, b, c, d, e, f, g, h, i]) =>
 
 export const mat3Identity = () => [1, 0, 0,  0, 1, 0,  0, 0, 1]
 
+export const mat3RotX = (deg) => {
+  const r = (deg * Math.PI) / 180
+  const c = Math.cos(r), s = Math.sin(r)
+  return [1, 0, 0,  0, c, -s,  0, s, c]
+}
+
 export const mat3RotY = (deg) => {
   const r = (deg * Math.PI) / 180
   const c = Math.cos(r), s = Math.sin(r)
@@ -65,6 +71,12 @@ export const mat3RotZ = (deg) => {
 export const mat3Scale  = (sx, sy, sz) => [sx, 0, 0,  0, sy, 0,  0, 0, sz]
 export const mat3ShearX = ()           => [1, 0.7, 0,  0, 1, 0,  0, 0, 1]
 export const mat3MirrorX = ()          => [-1, 0, 0,  0, 1, 0,  0, 0, 1]
+
+export const mat3Shear = (xy = 0, xz = 0, yx = 0, yz = 0, zx = 0, zy = 0) => [
+  1, xy, xz,
+  yx, 1, yz,
+  zx, zy, 1
+]
 
 // ─── Easing ──────────────────────────────────────────────────────────────────
 

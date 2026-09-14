@@ -7,6 +7,7 @@ const SHORTCUTS = {
     { keys: ['3'], desc: 'Scalars page' },
     { keys: ['4'], desc: 'Project page' },
     { keys: ['5'], desc: 'Cross page' },
+    { keys: ['6'], desc: 'Transform page' },
     { keys: ['Esc'], desc: 'Deselect / close' },
     { keys: ['?'], desc: 'Toggle this overlay' },
   ],

@@ -3,12 +3,13 @@ import { useStore } from '../state/useStore'
 import { useMatrixStore } from '../state/useMatrixStore'
 import { useScalarStore } from '../state/useScalarStore'
 import { useProjectionStore } from '../state/useProjectionStore'
+import { useTransformStore } from '../state/useTransformStore'
 import { useExportPng } from './useExportPng'
 
 /**
  * Global keyboard shortcut handler — mount once at App level.
  *
- * @param {string}   activePage     - 'Vectors' | 'Matrices' | 'Scalars' | 'Project'
+ * @param {string}   activePage     - 'Vectors' | 'Matrices' | 'Scalars' | 'Project' | 'Cross' | 'Transform'
  * @param {Function} setActivePage  - page setter
  * @param {Function} setShowShortcuts - toggle the shortcut overlay
  */
@@ -29,6 +30,7 @@ export function useKeyboardShortcuts(activePage, setActivePage, setShowShortcuts
       if (key === '3') { setActivePage('Scalars');  return }
       if (key === '4') { setActivePage('Project');  return }
       if (key === '5') { setActivePage('Cross');    return }
+      if (key === '6') { setActivePage('Transform'); return }
 
       // ── Overlay ────────────────────────────────────────────────────
       if (key === '?') { setShowShortcuts(prev => !prev); return }
@@ -166,6 +168,14 @@ export function useKeyboardShortcuts(activePage, setActivePage, setShowShortcuts
 
         if (key === 'p' || key === 'P') {
           store.toggleGsPlay()
+          return
+        }
+      }
+
+      // ── Transform page shortcuts ────────────────────────────────────
+      if (activePage === 'Transform') {
+        if (key === 'r' || key === 'R') {
+          useTransformStore.getState().reset()
           return
         }
       }
