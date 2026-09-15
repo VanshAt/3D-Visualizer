@@ -31,6 +31,7 @@ export function useKeyboardShortcuts(activePage, setActivePage, setShowShortcuts
       if (key === '4') { setActivePage('Project');  return }
       if (key === '5') { setActivePage('Cross');    return }
       if (key === '6') { setActivePage('Transform'); return }
+      if (key === '7') { setActivePage('Equations'); return }
 
       // ── Overlay ────────────────────────────────────────────────────
       if (key === '?') { setShowShortcuts(prev => !prev); return }

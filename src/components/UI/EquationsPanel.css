@@ -1,0 +1,159 @@
+.equations-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 16px;
+  margin-bottom: 16px;
+}
+
+.equation-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+}
+
+.eq-cell {
+  background: rgba(0, 0, 0, 0.2);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  color: #fff;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 14px;
+  text-align: center;
+  padding: 8px 4px;
+  transition: all 0.2s ease;
+  width: 45px;
+}
+
+.eq-cell:focus {
+  outline: none;
+  border-color: var(--primary);
+  background: rgba(0, 0, 0, 0.4);
+  box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.2);
+}
+
+.eq-const {
+  width: 55px;
+  border-color: rgba(77, 255, 136, 0.4);
+  color: #4dff88;
+}
+
+.eq-const:focus {
+  border-color: #4dff88;
+  box-shadow: 0 0 0 2px rgba(77, 255, 136, 0.2);
+}
+
+.eq-var, .eq-plus, .eq-equals {
+  color: var(--text-muted);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 14px;
+  user-select: none;
+}
+
+.eq-var {
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+.equations-actions {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.equations-actions .btn-secondary {
+  flex: 1;
+}
+
+.equations-result {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.det-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--border);
+}
+
+.det-label {
+  color: var(--text-secondary);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 14px;
+}
+
+.det-value {
+  color: #fff;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 16px;
+  font-weight: 600;
+  background: rgba(255, 255, 255, 0.1);
+  padding: 4px 8px;
+  border-radius: 6px;
+}
+
+.det-value.det-zero {
+  color: #ff4d6d;
+  background: rgba(255, 77, 109, 0.15);
+}
+
+.solution-box {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.solution-coords {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.coord-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.2);
+  padding: 8px 12px;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+}
+
+.coord-label {
+  color: var(--text-muted);
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 600;
+}
+
+.coord-val {
+  color: #4da6ff;
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 600;
+}
+
+.solution-error {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px;
+  background: rgba(255, 77, 109, 0.1);
+  border: 1px solid rgba(255, 77, 109, 0.3);
+  border-radius: 8px;
+  color: #ff4d6d;
+  font-weight: 500;
+}
+
+.error-icon {
+  font-size: 18px;
+}

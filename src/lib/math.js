@@ -338,3 +338,43 @@ export const eigenSolve3 = (M) => {
 
   return { real: realEigen, complex: complexEigen }
 }
+
+// ─── Linear Equations ────────────────────────────────────────────────────────
+
+/**
+ * Solves the 3×3 system  A·x = b  using matrix inversion.
+ * Returns { x: [x1, x2, x3], detA } or null if singular (abs(detA) < 1e-6).
+ */
+export const solveLinearSystem = (A, b) => {
+  const detA = det3(A)
+  if (Math.abs(detA) < 1e-6) return null
+  const A_inv = mat3Inverse(A)
+  if (!A_inv) return null
+  return { x: matMul(A_inv, b), detA }
+}
+
+/**
+ * Generates plane geometry basis vectors and origin for the plane ax + by + cz = d.
+ * Returns { u, v, center, normal }
+ */
+export const generatePlaneGeometry = (a, b, c, d) => {
+  const n = [a, b, c]
+  const nMag = magnitude(n)
+  if (nMag < 1e-6) return null
+  
+  const normal = normalize(n)
+  
+  // Find a point on the plane (closest to origin)
+  // The closest point to origin is d/|n|^2 * n
+  const center = scale(n, d / (nMag * nMag))
+  
+  // Pick an arbitrary vector not parallel to normal
+  // Use (0,1,0) unless normal is closely aligned with it, then use (1,0,0)
+  const up = Math.abs(normal[1]) > 0.9 ? [1, 0, 0] : [0, 1, 0]
+  
+  // Create two orthogonal basis vectors on the plane
+  const u = normalize(cross(up, normal))
+  const v = normalize(cross(normal, u))
+  
+  return { u, v, center, normal }
+}

@@ -5,11 +5,12 @@ import ScalarsPage    from './pages/ScalarsPage'
 import ProjectionPage from './pages/ProjectionPage'
 import CrossPage      from './pages/CrossPage'
 import TransformPage  from './pages/TransformPage'
+import EquationsPage  from './pages/EquationsPage'
 import ShortcutOverlay from './components/UI/ShortcutOverlay'
 import { useKeyboardShortcuts } from './hooks/useKeyboardShortcuts'
 import './App.css'
 
-const PAGES = ['Vectors', 'Matrices', 'Scalars', 'Project', 'Cross', 'Transform']
+const PAGES = ['Vectors', 'Matrices', 'Scalars', 'Project', 'Cross', 'Transform', 'Equations']
 
 export default function App() {
   const [activePage, setActivePage]       = useState('Vectors')
@@ -63,6 +64,7 @@ export default function App() {
         {activePage === 'Project'  && <ProjectionPage />}
         {activePage === 'Cross'    && <CrossPage />}
         {activePage === 'Transform' && <TransformPage />}
+        {activePage === 'Equations' && <EquationsPage />}
       </main>
 
       {/* Shortcut overlay */}

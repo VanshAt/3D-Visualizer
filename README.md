@@ -92,6 +92,14 @@ Visualise vectors, operations, and transformations right in your browser — no 
 
 ![Transformations Explorer showing scale, rotate, and shear sliders with a multicoloured cube](public/screenshots/22-day9-transform-explorer.png)
 
+### Day 10 — Systems of Linear Equations (Intersecting Planes)
+
+![Equations Explorer showing three distinct intersecting planes and a unique solution point](public/screenshots/23-day10-equations-initial.png)
+
+### Day 10 — Singular Matrix Warning (No unique solution)
+
+![Equations Explorer showing dependent planes with no unique solution and a det(A) of 0](public/screenshots/24-day10-equations-singular.png)
+
 ---
 
 ## Features (Day 9 ✅)
@@ -131,6 +139,8 @@ Visualise vectors, operations, and transformations right in your browser — no 
 | **Transformations Explorer module** — interactively compose Scale, Rotate, and Shear | ✅ |
 | **Live composed matrix** — watch the 3x3 matrix update instantly during slider drag | ✅ |
 | **Multicoloured cube** — clear visualisation of 3D deformations | ✅ |
+| **Systems of Linear Equations** — visualises $Ax = b$ as 3 intersecting planes | ✅ |
+| **Singular system detection** — distinct UI warning when $det(A) = 0$ | ✅ |
 
 
 ---
@@ -139,7 +149,7 @@ Visualise vectors, operations, and transformations right in your browser — no 
 
 | Key | Action |
 |---|---|
-| `1` / `2` / `3` / `4` / `5` / `6` | Switch page (Vectors / Matrices / Scalars / Project / Cross / Transform) |
+| `1` / `2` / `3` / `4` / `5` / `6` / `7` | Switch page (Vectors / Matrices / Scalars / Project / Cross / Transform / Equations) |
 | `A` | Add vector (Vectors) · Add base vector (Scalars / Project) |
 | `Delete` | Delete selected vector (Vectors) · Remove last base vector (Scalars / Project) |
 | `H` | Hide / show selected vector |
@@ -217,6 +227,8 @@ src/
 - **Day 6** — Scalars module: linear combinations, sweep animation, ghost arrows ✅
 - **Day 7** — Projection & Gram-Schmidt: project onto vectors/subspaces, step-by-step orthonormalisation ✅
 - **Day 8** — Cross Product Explorer: orthogonal vector, parallelogram area, right-hand rule ✅
+- **Day 9** — Transformations Explorer ✅
+- **Day 10** — Systems of Linear Equations Explorer: 3D intersecting planes, singular detection ✅
 
 ---
 
