@@ -13,7 +13,7 @@ function EquationInput({ row, A, b, setA, setB }) {
         type="number"
         step={0.1}
         className="eq-cell eq-coeff"
-        value={parseFloat(A[rowOffset].toFixed(3))}
+        value={isNaN(A[rowOffset]) ? '' : parseFloat(A[rowOffset].toFixed(3))}
         onChange={(e) => setA(rowOffset, parseFloat(e.target.value))}
       />
       <span className="eq-var">x</span>
@@ -23,7 +23,7 @@ function EquationInput({ row, A, b, setA, setB }) {
         type="number"
         step={0.1}
         className="eq-cell eq-coeff"
-        value={parseFloat(A[rowOffset + 1].toFixed(3))}
+        value={isNaN(A[rowOffset + 1]) ? '' : parseFloat(A[rowOffset + 1].toFixed(3))}
         onChange={(e) => setA(rowOffset + 1, parseFloat(e.target.value))}
       />
       <span className="eq-var">y</span>
@@ -33,7 +33,7 @@ function EquationInput({ row, A, b, setA, setB }) {
         type="number"
         step={0.1}
         className="eq-cell eq-coeff"
-        value={parseFloat(A[rowOffset + 2].toFixed(3))}
+        value={isNaN(A[rowOffset + 2]) ? '' : parseFloat(A[rowOffset + 2].toFixed(3))}
         onChange={(e) => setA(rowOffset + 2, parseFloat(e.target.value))}
       />
       <span className="eq-var">z</span>
@@ -43,7 +43,7 @@ function EquationInput({ row, A, b, setA, setB }) {
         type="number"
         step={0.1}
         className="eq-cell eq-const"
-        value={parseFloat(b[row].toFixed(3))}
+        value={isNaN(b[row]) ? '' : parseFloat(b[row].toFixed(3))}
         onChange={(e) => setB(row, parseFloat(e.target.value))}
       />
     </div>

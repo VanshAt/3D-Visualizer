@@ -358,6 +358,7 @@ export const solveLinearSystem = (A, b) => {
  * Returns { u, v, center, normal }
  */
 export const generatePlaneGeometry = (a, b, c, d) => {
+  if (isNaN(a) || isNaN(b) || isNaN(c) || isNaN(d)) return null
   const n = [a, b, c]
   const nMag = magnitude(n)
   if (nMag < 1e-6) return null
