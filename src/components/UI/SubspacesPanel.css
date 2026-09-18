@@ -1,0 +1,75 @@
+.preset-select {
+  width: 100%;
+  padding: 8px;
+  background: var(--bg-darker);
+  border: 1px solid var(--border-color);
+  color: #fff;
+  border-radius: 4px;
+}
+
+.matrix-input {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.matrix-row {
+  display: flex;
+  gap: 4px;
+}
+
+.matrix-cell {
+  flex: 1;
+  width: 100%;
+  padding: 6px;
+  background: var(--bg-darker);
+  border: 1px solid var(--border-color);
+  color: #fff;
+  text-align: center;
+  border-radius: 4px;
+}
+
+.toggle-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.toggle-btn {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #fff;
+  padding: 8px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s;
+  text-align: left;
+}
+
+.toggle-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.toggle-btn.active {
+  background: rgba(255, 255, 255, 0.2);
+  border-color: #fff;
+}
+
+.legend-group {
+  margin-top: 16px;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+  color: #cbd5e0;
+  font-size: 0.9rem;
+}
+
+.color-box {
+  width: 16px;
+  height: 16px;
+  border-radius: 2px;
+}

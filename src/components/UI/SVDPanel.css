@@ -1,0 +1,75 @@
+.timeline-labels {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 8px;
+  font-size: 0.8rem;
+  color: #718096;
+}
+
+.timeline-labels span {
+  flex: 1;
+  text-align: center;
+  transition: color 0.2s;
+}
+
+.active-stage {
+  color: #fff !important;
+  font-weight: bold;
+}
+
+.playback-controls {
+  display: flex;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.play-btn {
+  flex: 2;
+  background: var(--accent-color);
+  color: #fff;
+  border: none;
+  padding: 8px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.play-btn:hover {
+  background: var(--accent-hover);
+}
+
+.svd-readout {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 16px;
+  background: rgba(255, 255, 255, 0.02);
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px dashed rgba(255, 255, 255, 0.1);
+}
+
+.svd-matrix-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: monospace;
+  font-size: 0.85rem;
+  color: #cbd5e0;
+}
+
+.matrix-label {
+  font-weight: bold;
+  color: #fff;
+  margin-bottom: 4px;
+}
+
+.readout-row {
+  display: flex;
+  gap: 8px;
+}
+
+.readout-row span {
+  width: 40px;
+  text-align: right;
+}

@@ -1,0 +1,98 @@
+.panel-container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 20px;
+  background: var(--panel-bg);
+  border-left: 1px solid var(--border-color);
+  overflow-y: auto;
+  height: 100%;
+}
+
+.panel-title {
+  margin: 0;
+  font-size: 1.2rem;
+  color: #fff;
+}
+
+.panel-description {
+  font-size: 0.9rem;
+  color: #a0aec0;
+  margin-bottom: 8px;
+}
+
+.control-group {
+  background: rgba(255, 255, 255, 0.03);
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.group-label {
+  display: block;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #cbd5e0;
+  margin-bottom: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.vector-input-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.vector-label {
+  font-weight: bold;
+  font-size: 1rem;
+  width: 20px;
+}
+
+.vector-input-row input {
+  flex: 1;
+  width: 100%;
+  background: var(--bg-darker);
+  border: 1px solid var(--border-color);
+  color: #fff;
+  padding: 6px;
+  border-radius: 4px;
+  font-family: monospace;
+}
+
+.slider {
+  width: 100%;
+  accent-color: var(--accent-color);
+}
+
+.toggle-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.checkbox-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  color: #e2e8f0;
+}
+
+.reset-btn {
+  margin-top: auto;
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 8px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.reset-btn:hover {
+  background: rgba(255, 255, 255, 0.15);
+}

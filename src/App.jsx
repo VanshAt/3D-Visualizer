@@ -6,11 +6,14 @@ import ProjectionPage from './pages/ProjectionPage'
 import CrossPage      from './pages/CrossPage'
 import TransformPage  from './pages/TransformPage'
 import EquationsPage  from './pages/EquationsPage'
+import BasisPage      from './pages/BasisPage'
+import SubspacesPage  from './pages/SubspacesPage'
+import SVDPage        from './pages/SVDPage'
 import ShortcutOverlay from './components/UI/ShortcutOverlay'
 import { useKeyboardShortcuts } from './hooks/useKeyboardShortcuts'
 import './App.css'
 
-const PAGES = ['Vectors', 'Matrices', 'Scalars', 'Project', 'Cross', 'Transform', 'Equations']
+const PAGES = ['Vectors', 'Matrices', 'Scalars', 'Project', 'Cross', 'Basis', 'Subspaces', 'SVD', 'Transform', 'Equations']
 
 export default function App() {
   const [activePage, setActivePage]       = useState('Vectors')
@@ -65,6 +68,9 @@ export default function App() {
         {activePage === 'Cross'    && <CrossPage />}
         {activePage === 'Transform' && <TransformPage />}
         {activePage === 'Equations' && <EquationsPage />}
+        {activePage === 'Basis'     && <BasisPage />}
+        {activePage === 'Subspaces' && <SubspacesPage />}
+        {activePage === 'SVD'       && <SVDPage />}
       </main>
 
       {/* Shortcut overlay */}

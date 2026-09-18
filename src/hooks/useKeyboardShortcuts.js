@@ -32,6 +32,9 @@ export function useKeyboardShortcuts(activePage, setActivePage, setShowShortcuts
       if (key === '5') { setActivePage('Cross');    return }
       if (key === '6') { setActivePage('Transform'); return }
       if (key === '7') { setActivePage('Equations'); return }
+      if (key === '8') { setActivePage('Basis'); return }
+      if (key === '9') { setActivePage('Subspaces'); return }
+      if (key === '0') { setActivePage('SVD'); return }
 
       // ── Overlay ────────────────────────────────────────────────────
       if (key === '?') { setShowShortcuts(prev => !prev); return }
