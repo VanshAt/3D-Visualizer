@@ -56,6 +56,10 @@ export default function BasisScene({ glRef }) {
     return [vec.x, vec.y, vec.z]
   }, [matrix, v])
 
+  const b1Morphed = useMemo(() => [matrix.elements[0], matrix.elements[1], matrix.elements[2]], [matrix])
+  const b2Morphed = useMemo(() => [matrix.elements[4], matrix.elements[5], matrix.elements[6]], [matrix])
+  const b3Morphed = useMemo(() => [matrix.elements[8], matrix.elements[9], matrix.elements[10]], [matrix])
+
   return (
     <>
       <GlCapture glRef={glRef} />
@@ -75,11 +79,16 @@ export default function BasisScene({ glRef }) {
         <group matrixAutoUpdate={false} matrix={matrix}>
           {/* XY plane morphed grid */}
           <gridHelper args={[10, 10, '#c77dff', '#5a189a']} rotation={[Math.PI/2, 0, 0]} />
-          {/* Show the basis vectors themselves within the transformed space */}
-          <VectorRender position={[1, 0, 0]} color="#ff4d4d" />
-          <VectorRender position={[0, 1, 0]} color="#4dff4d" />
-          <VectorRender position={[0, 0, 1]} color="#4d4dff" />
         </group>
+      )}
+
+      {/* Show the basis vectors themselves (rendered in standard space to avoid Line2 skew bugs) */}
+      {showCustomGrid && (
+        <>
+          <VectorRender position={b1Morphed} color="#ff4d4d" />
+          <VectorRender position={b2Morphed} color="#4dff4d" />
+          <VectorRender position={b3Morphed} color="#4d4dff" />
+        </>
       )}
 
       {/* The Vector v */}
